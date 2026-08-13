@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link"; 
 import { 
   SiNextdotjs, SiReact, SiFlutter, SiNodedotjs, SiAndroid, 
-  SiFirebase, SiMongodb, SiMysql, SiVercel, SiFigma, SiStripe, SiTailwindcss 
+  SiFirebase, SiMongodb, SiMysql, SiVercel, SiFigma, SiStripe, SiTailwindcss, 
+  SiPython
 } from "react-icons/si";
 import { FaCloud, FaGear, FaCartShopping } from "react-icons/fa6";
 
@@ -23,7 +24,12 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceType | null>(null);
-
+   const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{ role: 'user' | 'ai'; text: string }[]>([
+    { role: 'ai', text: "Hi there! 👋 I'm your AI assistant. Ask me about VivekM Technologies, our services, or how we can help build your product!" }
+  ]);
+  const [inputText, setInputText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   // --- Scroll Animation & Navbar Effects ---
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +64,43 @@ export default function Home() {
     }
     setMenuOpen(false);
     setSelectedService(null); 
+  };
+
+  // --- Chatbot Logic ---
+  const handleSendMessage = () => {
+    if (!inputText.trim()) return;
+
+    // Add user message
+    const newMessages = [...chatMessages, { role: 'user' as const, text: inputText }];
+    setChatMessages(newMessages);
+    setInputText("");
+    setIsTyping(true);
+
+    // Simulate AI thinking and response
+    setTimeout(() => {
+      simulateAIResponse(newMessages);
+    }, 1000);
+  };
+
+  const simulateAIResponse = (history: { role: 'user' | 'ai'; text: string }[]) => {
+    const lastUserMsg = history[history.length - 1].text.toLowerCase();
+    let response = "";
+
+    // --- Customize these replies based on your business! ---
+    if (lastUserMsg.includes("price") || lastUserMsg.includes("cost") || lastUserMsg.includes("hire")) {
+      response = "Our pricing depends entirely on your project's specific needs. Could you share a brief description of what you're trying to build? I can give you a rough estimate right now!";
+    } else if (lastUserMsg.includes("web") || lastUserMsg.includes("website")) {
+      response = "We specialize in high-performance websites using Next.js, React, and Tailwind CSS. We focus on speed, SEO, and beautiful UI. Do you have an existing design, or do you need help with the design too?";
+    } else if (lastUserMsg.includes("mobile") || lastUserMsg.includes("app")) {
+      response = "We build amazing mobile apps using Flutter and React Native. This allows us to launch on both iOS and Android simultaneously, saving you time and money!";
+    } else if (lastUserMsg.includes("hello") || lastUserMsg.includes("hi") || lastUserMsg.includes("hey")) {
+      response = "Hello! 😊 Great to meet you. I'm here to answer any questions about VivekM Technologies and our software development services. What can I help you with today?";
+    } else {
+      response = "That's a great question! To give you the best answer, could you tell me a bit more about your project? You can also explore our Services section right below!";
+    }
+
+    setIsTyping(false);
+    setChatMessages((prev) => [...prev, { role: 'ai', text: response }]);
   };
 
   // --- DATA: Services with Full Details & Tech Logos ---
@@ -242,14 +285,34 @@ export default function Home() {
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-10 md:flex">
-            <Link href="/services" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">Services</Link>
-            <Link href="/solutions" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">Solutions</Link>
-            <Link href="/work" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">Projects</Link>
-            <Link href="/about" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">About</Link>
+                    <nav className="hidden items-center gap-10 md:flex">
+            <button 
+              onClick={() => scrollToSection("services")}
+              className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full"
+            >
+              Services
+            </button>
+            <button 
+              onClick={() => scrollToSection("solutions")}
+              className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full"
+            >
+              Solutions
+            </button>
+            <button 
+              onClick={() => scrollToSection("projects")}
+              className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full"
+            >
+              Projects
+            </button>
+            <button 
+              onClick={() => scrollToSection("about")}
+              className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full"
+            >
+              About
+            </button>
           </nav>
 
-          <Link href="/contact" className="hidden rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl md:block">Get a Quote</Link>
+                    <button onClick={() => scrollToSection("contact")} className="hidden rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl md:block">Get a Quote</button>
 
           <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-lg border border-zinc-200 px-3 py-2 transition hover:bg-zinc-50 md:hidden" aria-label="Open menu">
             {menuOpen ? "✕" : "☰"}
@@ -259,10 +322,10 @@ export default function Home() {
         {menuOpen && (
           <div className="border-t border-zinc-200 bg-white px-6 py-5 shadow-lg md:hidden">
             <div className="flex flex-col gap-4">
-              <Link href="/services" onClick={() => setMenuOpen(false)} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">Services</Link>
-              <Link href="/solutions" onClick={() => setMenuOpen(false)} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">Solutions</Link>
-              <Link href="/work" onClick={() => setMenuOpen(false)} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">Projects</Link>
-              <Link href="/about" onClick={() => setMenuOpen(false)} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">About</Link>
+              <button onClick={() => { setMenuOpen(false); scrollToSection("services"); }} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">Services</button>
+              <button onClick={() => { setMenuOpen(false); scrollToSection("solutions"); }} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">Solutions</button>
+              <button onClick={() => { setMenuOpen(false); scrollToSection("projects"); }} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">Projects</button>
+              <button onClick={() => { setMenuOpen(false); scrollToSection("about"); }} className="text-left text-base font-medium text-zinc-600 transition hover:text-blue-600">About</button>
               <Link href="/contact" onClick={() => setMenuOpen(false)} className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-5 py-3 text-center font-semibold text-white shadow-lg">Get a Quote</Link>
             </div>
           </div>
@@ -294,11 +357,11 @@ export default function Home() {
               VivekM Technologies helps businesses transform ideas into powerful websites, mobile applications, and scalable software solutions with modern technology.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="group rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3.5 text-center font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
+             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <button onClick={() => scrollToSection("contact")} className="group rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3.5 text-center font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
                 Start a Project <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-              <Link href="/services" className="rounded-full border border-zinc-300 px-8 py-3.5 text-center font-semibold transition-all hover:border-blue-600 hover:bg-blue-50">Explore Services</Link>
+              </button>
+              <button onClick={() => scrollToSection("services")} className="rounded-full border border-zinc-300 px-8 py-3.5 text-center font-semibold transition-all hover:border-blue-600 hover:bg-blue-50">Explore Services</button>
             </div>
 
             <div className="mt-12 flex flex-wrap gap-x-12 gap-y-5 border-t border-zinc-200 pt-7">
@@ -371,7 +434,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES SECTION */}
+           {/* SERVICES SECTION - WITH GRADIENT BORDERS */}
       <section id="services" className="bg-zinc-50/80 py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
@@ -386,28 +449,48 @@ export default function Home() {
           </div>
 
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <div
-                key={service.number}
-                onClick={() => setSelectedService(service)}
-                className="group cursor-pointer rounded-2xl bg-white p-8 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl">{service.icon}</span>
-                  <span className="text-sm font-bold text-zinc-400 group-hover:text-blue-600">{service.number}</span>
+            {services.map((service, index) => {
+              // Array of beautiful gradients for each card
+              const gradients = [
+                "from-blue-500 to-cyan-400",
+                "from-purple-500 to-pink-500",
+                "from-green-500 to-teal-400",
+                "from-orange-500 to-red-400",
+                "from-indigo-500 to-blue-400",
+                "from-teal-500 to-emerald-400"
+              ];
+              const gradient = gradients[index % gradients.length];
+
+              return (
+                <div
+                  key={service.number}
+                  onClick={() => setSelectedService(service)}
+                  className="group cursor-pointer relative rounded-2xl bg-white p-8 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 overflow-hidden border border-zinc-100"
+                >
+                  {/* Subtle gradient background glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-300`}></div>
+                  
+                  {/* Gradient Top Border */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${gradient}`}></div>
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl">{service.icon}</span>
+                      <span className="text-sm font-bold text-zinc-400 group-hover:text-blue-600">{service.number}</span>
+                    </div>
+                    <h3 className="mt-8 text-2xl font-bold group-hover:text-blue-600">{service.title}</h3>
+                    <p className="mt-4 leading-7 text-zinc-600">{service.description}</p>
+                    <div className="mt-7 flex flex-wrap gap-2">
+                      {service.tags.map((tag, i) => (
+                        <span key={i} className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 group-hover:bg-blue-50 group-hover:text-blue-600">
+                          {tag.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <h3 className="mt-8 text-2xl font-bold group-hover:text-blue-600">{service.title}</h3>
-                <p className="mt-4 leading-7 text-zinc-600">{service.description}</p>
-                <div className="mt-7 flex flex-wrap gap-2">
-                  {/* Only render text on the main card to keep it clean */}
-                  {service.tags.map((tag, i) => (
-                    <span key={i} className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 group-hover:bg-blue-50 group-hover:text-blue-600">
-                      {tag.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -480,7 +563,7 @@ export default function Home() {
 
               <div className="mt-10 flex justify-end border-t border-zinc-100 pt-8">
                 <button
-                  onClick={() => { setSelectedService(null); window.location.href="/contact"; }}
+                  onClick={() => { setSelectedService(null); scrollToSection("contact"); }}
                   className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:scale-105"
                 >
                   Discuss this Service →
@@ -491,7 +574,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* SOLUTIONS */}
+           {/* SOLUTIONS - WITH GRADIENT BORDERS */}
       <section id="solutions" className="py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
@@ -504,22 +587,35 @@ export default function Home() {
               <p className="mt-6 text-lg leading-8 text-zinc-600">
                 We combine product thinking, design, and engineering to create solutions that are reliable today and ready for tomorrow.
               </p>
-              <Link href="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
+                <button onClick={() => scrollToSection("contact")} className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
                 Discuss your idea →
-              </Link>
+              </button>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               {[
-                ["01", "Discover", "Understand your business, users and goals."],
-                ["02", "Design", "Create intuitive experiences and interfaces."],
-                ["03", "Develop", "Build secure, scalable and maintainable software."],
-                ["04", "Launch", "Deploy, monitor and continuously improve."],
-              ].map(([number, title, description]) => (
-                <div key={number} className="group rounded-3xl border border-zinc-200 p-7 transition-all hover:border-blue-200 hover:shadow-lg">
-                  <span className="text-sm font-bold text-blue-600">{number}</span>
-                  <h3 className="mt-8 text-xl font-bold group-hover:text-blue-600">{title}</h3>
-                  <p className="mt-3 leading-6 text-zinc-600">{description}</p>
+                ["01", "Discover", "Understand your business, users and goals.", "from-blue-500 to-cyan-400"],
+                ["02", "Design", "Create intuitive experiences and interfaces.", "from-purple-500 to-pink-500"],
+                ["03", "Develop", "Build secure, scalable and maintainable software.", "from-green-500 to-teal-400"],
+                ["04", "Launch", "Deploy, monitor and continuously improve.", "from-orange-500 to-red-400"],
+              ].map(([number, title, description, gradient]) => (
+                <div
+                  key={number}
+                  className="group relative rounded-3xl border border-zinc-200 p-7 transition-all hover:border-transparent hover:shadow-lg overflow-hidden bg-white"
+                >
+                  {/* Subtle gradient background glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-300`}></div>
+                  
+                  {/* Gradient Top Border */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${gradient}`}></div>
+
+                  <div className="relative z-10">
+                    <span className={`text-sm font-bold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+                      {number}
+                    </span>
+                    <h3 className="mt-8 text-xl font-bold group-hover:text-blue-600">{title}</h3>
+                    <p className="mt-3 leading-6 text-zinc-600">{description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -582,56 +678,172 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TECHNOLOGIES */}
-      <section className="border-b border-zinc-200 py-20 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">Technology expertise</p>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-              Modern technology.<br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Practical solutions.</span>
+           {/* TECHNOLOGIES - WITH LOGOS & 5-COLUMN GRID */}
+      <section className="border-b border-zinc-200 py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 bg-white">
+        <div className="mx-auto max-w-5xl px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+              Technology expertise
+            </p>
+            <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+              Modern technology.
+              <br />
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Practical solutions.
+              </span>
             </h2>
           </div>
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
-            {technologies.map((tech) => (
-              <span key={tech.name} className="rounded-full border border-zinc-200 bg-white px-5 py-3 text-sm font-medium text-zinc-700 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600">
-                {tech.name}
-              </span>
+
+          {/* 5-Column Grid Layout */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
+            {[
+              { name: "React", icon: SiReact, color: "#61DAFB" },
+              { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+              { name: "Flutter", icon: SiFlutter, color: "#02569B" },
+              { name: "React Native", icon: SiReact, color: "#61DAFB" },
+              { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+              { name: "Python", icon: SiPython, color: "#3776AB" }, // Replaced Java with Python to fix error
+              { name: "Android", icon: SiAndroid, color: "#3DDC84" },
+              { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
+              { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+              { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+              { name: "Vercel", icon: SiVercel, color: "#000000" },
+            ].map((tech) => (
+              <div
+                key={tech.name}
+                className="group relative flex items-center gap-3 rounded-2xl border border-zinc-200 bg-white px-5 py-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-1 overflow-hidden"
+              >
+                {/* Subtle colored bottom border & glow */}
+                <div className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[${tech.color}] to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+                <div className={`absolute -inset-1 bg-[${tech.color}] opacity-0 group-hover:opacity-[0.03] blur-xl transition-opacity`}></div>
+
+                {/* The Logo */}
+                <tech.icon className="text-2xl relative z-10" style={{ color: tech.color }} />
+
+                {/* The Name */}
+                <span className="text-[15px] font-semibold text-zinc-700 relative z-10 group-hover:text-zinc-900 transition-colors">
+                  {tech.name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* ABOUT - CINEMATIC BOARDROOM MEETING */}
       <section id="about" className="py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="rounded-[2rem] bg-gradient-to-br from-zinc-50 to-blue-50/50 p-8 sm:p-12 lg:p-16">
-            <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">About VivekM</p>
-                <h2 className="mt-4 text-4xl font-bold tracking-tight">
-                  Your technology partner for<br />
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">the digital era.</span>
-                </h2>
-              </div>
-              <div>
-                <p className="text-xl leading-9 text-zinc-700">VivekM Technologies is a software development company focused on helping businesses turn ideas into dependable digital products.</p>
-                <p className="mt-6 leading-8 text-zinc-600">
-                  Whether you need a business website, mobile application, custom software, API integration, or ongoing technical support, we work closely with you from concept to launch and beyond.
+            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+              
+              {/* Left Column: Text */}
+              <div className="flex flex-col justify-center">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+                  About VivekM
                 </p>
-                <div className="mt-9 grid gap-6 sm:grid-cols-3">
-                  {[
-                    ["01", "Business-first thinking", "We align technology with your business goals"],
-                    ["02", "Modern engineering", "We use the latest frameworks and best practices"],
-                    ["03", "Long-term partnership", "We support you beyond launch"],
-                  ].map(([number, title, description]) => (
-                    <div key={number} className="rounded-2xl bg-white/50 p-5">
-                      <div className="text-2xl font-bold text-blue-600">{number}</div>
-                      <div className="mt-2 font-semibold text-zinc-900">{title}</div>
-                      <div className="mt-1 text-sm text-zinc-500">{description}</div>
+                <h2 className="mt-4 text-4xl font-bold tracking-tight">
+                  Your technology partner for
+                  <br />
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    the digital era.
+                  </span>
+                </h2>
+                <p className="mt-6 text-lg leading-8 text-zinc-600">
+                  VivekM Technologies is a software development company focused
+                  on helping businesses turn ideas into dependable digital products.
+                </p>
+                <p className="mt-4 leading-7 text-zinc-600">
+                  Whether you need a business website, mobile application, custom
+                  software, API integration, or ongoing technical support, we work
+                  closely with you from concept to launch and beyond.
+                </p>
+              </div>
+
+              {/* Right Column: Cinematic Full Boardroom Video UI */}
+              <div className="relative group overflow-hidden rounded-2xl bg-zinc-900 shadow-2xl transition-all hover:shadow-3xl hover:-translate-y-1 h-[400px] w-full border border-zinc-800">
+                
+                {/* 1. Background Gradient (The Room) */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-zinc-900 to-purple-950"></div>
+
+                {/* 2. The Boardroom "Smart Board" Screen */}
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                  {/* Glowing Light Effect from the Screen */}
+                  <div className="absolute inset-0 bg-blue-500/10 blur-[80px]"></div>
+                  
+                  {/* The Screen Frame */}
+                  <div className="relative w-[80%] h-[55%] bg-zinc-950 rounded-2xl border border-zinc-700/50 shadow-[0_0_50px_rgba(59,130,246,0.2)] overflow-hidden flex items-center justify-center">
+                    {/* Presentation Content on Board */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 to-zinc-800 p-8">
+                      <div className="flex justify-between items-start mb-6">
+                        <div className="text-blue-400 font-bold tracking-widest text-xs">Q2 STRATEGY</div>
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                          <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
+                          <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
+                        </div>
+                      </div>
+                      {/* Fake Charts on the screen */}
+                      <div className="flex gap-4 h-[60%] items-end">
+                        <div className="w-8 bg-blue-500/80 rounded-t-lg h-[40%]"></div>
+                        <div className="w-8 bg-blue-400/80 rounded-t-lg h-[70%]"></div>
+                        <div className="w-8 bg-purple-500/80 rounded-t-lg h-[50%]"></div>
+                        <div className="w-8 bg-blue-500/80 rounded-t-lg h-[85%]"></div>
+                        <div className="w-8 bg-purple-400/80 rounded-t-lg h-[60%]"></div>
+                      </div>
+                      <div className="mt-4 flex gap-2">
+                        <div className="h-2 w-20 rounded-full bg-zinc-700"></div>
+                        <div className="h-2 w-16 rounded-full bg-zinc-700"></div>
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
+
+                {/* 3. The Group of People (Silhouettes) - Makes it look full */}
+                <div className="absolute bottom-14 left-1/2 -translate-x-1/2 w-[70%] flex justify-center gap-4">
+                  {/* Person 1 */}
+                  <div className="w-10 h-14 bg-zinc-800/80 rounded-t-xl border border-zinc-700/50 relative">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-6 h-6 bg-zinc-800/80 rounded-full border border-zinc-700/50"></div>
+                  </div>
+                  {/* Person 2 (Center - Speaking) */}
+                  <div className="w-10 h-14 bg-zinc-700/80 rounded-t-xl border border-blue-500/50 relative animate-pulse shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-6 h-6 bg-zinc-700/80 rounded-full border border-blue-500/50"></div>
+                  </div>
+                  {/* Person 3 */}
+                  <div className="w-10 h-14 bg-zinc-800/80 rounded-t-xl border border-zinc-700/50 relative">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-6 h-6 bg-zinc-800/80 rounded-full border border-zinc-700/50"></div>
+                  </div>
+                  {/* Person 4 */}
+                  <div className="w-10 h-14 bg-zinc-800/80 rounded-t-xl border border-zinc-700/50 relative">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-6 h-6 bg-zinc-800/80 rounded-full border border-zinc-700/50"></div>
+                  </div>
+                </div>
+
+                {/* 4. Glossy Bottom UI Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-zinc-900/90 via-zinc-900/60 to-transparent backdrop-blur-sm border-t border-white/5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                      </div>
+                      <span className="text-xs font-bold tracking-widest text-red-400 uppercase">Live</span>
+                      <span className="text-xs text-zinc-400 ml-2 border-l border-zinc-700 pl-2">Boardroom Strategy</span>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <div className="h-9 w-9 rounded-full bg-zinc-800/80 backdrop-blur border border-zinc-700/50 flex items-center justify-center text-zinc-400 text-xs cursor-pointer hover:bg-zinc-700 transition">
+                        🎤
+                      </div>
+                      <div className="h-9 w-9 rounded-full bg-zinc-800/80 backdrop-blur border border-zinc-700/50 flex items-center justify-center text-zinc-400 text-xs cursor-pointer hover:bg-zinc-700 transition">
+                        📹
+                      </div>
+                      {/* <div className="h-9 px-5 rounded-full bg-red-500/90 backdrop-blur text-white text-xs font-bold flex items-center justify-center shadow-lg shadow-red-500/20 cursor-pointer hover:bg-red-600 transition">
+                        End Call
+                      </div> */}
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -683,14 +895,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div>
+                        <div>
               <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">Services</h3>
               <div className="mt-5 space-y-3 text-sm text-zinc-400">
-                <Link href="/services" className="block hover:text-white transition">Web Development</Link>
-                <Link href="/services" className="block hover:text-white transition">Mobile App Development</Link>
-                <Link href="/services" className="block hover:text-white transition">UI/UX Design</Link>
-                <Link href="/services" className="block hover:text-white transition">E-Commerce</Link>
-                <Link href="/services" className="block hover:text-white transition">Backend & APIs</Link>
+                <button onClick={() => scrollToSection("services")} className="block hover:text-white transition text-left w-full">Web Development</button>
+                <button onClick={() => scrollToSection("services")} className="block hover:text-white transition text-left w-full">Mobile App Development</button>
+                <button onClick={() => scrollToSection("services")} className="block hover:text-white transition text-left w-full">UI/UX Design</button>
+                <button onClick={() => scrollToSection("services")} className="block hover:text-white transition text-left w-full">E-Commerce</button>
+                <button onClick={() => scrollToSection("services")} className="block hover:text-white transition text-left w-full">Backend & APIs</button>
               </div>
             </div>
 
@@ -715,10 +927,97 @@ export default function Home() {
       </footer>
 
       {/* FLOATING WHATSAPP */}
-      <a href="https://api.whatsapp.com/send?phone=919693427671&text=Hello%20VivekM%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 text-3xl text-white shadow-2xl transition-all hover:scale-110 hover:shadow-green-500/50">
+      {/* <a href="https://api.whatsapp.com/send?phone=919693427671&text=Hello%20VivekM%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 text-3xl text-white shadow-2xl transition-all hover:scale-110 hover:shadow-green-500/50">
         <span className="absolute inset-0 animate-ping rounded-full bg-green-500/30" />
         <span className="relative">💬</span>
-      </a>
+      </a> */}
+            {/* --- AI CHATBOT FLOATING BUTTON --- */}
+      <div className="group fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        
+        {/* The Chat Window (Only shows when open) */}
+        {chatOpen && (
+          <div className="mb-4 w-[350px] sm:w-[400px] h-[500px] bg-zinc-900/95 backdrop-blur-xl border border-zinc-700/50 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 border-b-4 border-green-500">
+            
+            {/* Chat Header */}
+            <div className="p-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/80">
+              <div className="flex items-center gap-3">
+                <div className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </div>
+                <span className="text-sm font-semibold text-white">AI Assistant</span>
+                <span className="text-[10px] text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded-full">Online</span>
+              </div>
+              <button onClick={() => setChatOpen(false)} className="text-zinc-400 hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
+
+            {/* Chat Messages Area */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-900/50">
+              {chatMessages.map((msg, idx) => (
+                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
+                    msg.role === 'user' 
+                      ? 'bg-blue-600 text-white rounded-br-none' 
+                      : 'bg-zinc-800/80 text-zinc-200 border border-zinc-700/50 rounded-bl-none'
+                  }`}>
+                    {msg.text}
+                  </div>
+                </div>
+              ))}
+              
+              {/* Typing Indicator (Skeleton) */}
+              {isTyping && (
+                <div className="flex justify-start">
+                  <div className="bg-zinc-800/80 border border-zinc-700/50 rounded-2xl rounded-bl-none px-4 py-3 flex gap-1 items-center">
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-bounce [animation-delay:-0.3s]"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-bounce [animation-delay:-0.15s]"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-bounce"></div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Chat Input Area */}
+            <div className="p-4 border-t border-zinc-800 bg-zinc-900/80 flex gap-2">
+              <input 
+                type="text" 
+                placeholder="Ask me anything..." 
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                className="flex-1 bg-zinc-800/50 border border-zinc-700/50 text-white rounded-full px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-zinc-500"
+              />
+              <button 
+                onClick={handleSendMessage}
+                className="h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-900/20 hover:bg-blue-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={!inputText.trim()}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* The Floating Toggle Button (Matches your screenshot) */}
+        <button 
+          onClick={() => setChatOpen(!chatOpen)}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-2xl transition-all hover:scale-110 active:scale-95"
+        >
+          {/* Pulsing background ring */}
+          <span className={`absolute inset-0 rounded-full bg-green-500/30 animate-ping ${chatOpen ? 'opacity-0' : 'opacity-100'}`} />
+          
+          {/* Icon: Switches between Chat Bubble and Close (X) */}
+          {chatOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          )}
+        </button>
+      </div>
     </main>
   );
 }
