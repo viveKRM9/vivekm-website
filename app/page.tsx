@@ -2,117 +2,23 @@
 
 import { useState, useEffect } from "react";
 
-// --- YOUR EXACT ORIGINAL SERVICES ---
-const services = [
-  {
-    number: "01",
-    title: "Web Development",
-    description:
-      "High-performance websites and web applications built for startups, businesses and enterprises using modern frameworks.",
-    tags: ["Next.js", "React", "Node.js"],
-    icon: "🌐",
-  },
-  {
-    number: "02",
-    title: "Mobile App Development",
-    description:
-      "Scalable Android and iOS applications with beautiful interfaces, offline support, and reliable backend systems.",
-    tags: ["Flutter", "React Native", "Android"],
-    icon: "📱",
-  },
-  {
-    number: "03",
-    title: "UI/UX Design",
-    description:
-      "User-focused digital experiences that combine modern design principles, usability research, and business goals.",
-    tags: ["Figma", "Design Systems", "Prototyping"],
-    icon: "🎨",
-  },
-  {
-    number: "04",
-    title: "E-Commerce Solutions",
-    description:
-      "Complete online shopping platforms with integrated payments, inventory management, orders, and customer management.",
-    tags: ["E-Commerce", "Payments", "APIs"],
-    icon: "🛒",
-  },
-  {
-    number: "05",
-    title: "Backend & APIs",
-    description:
-      "Secure and scalable APIs that power mobile apps, websites, and business applications with high performance.",
-    tags: ["REST API", "Node.js", "Database"],
-    icon: "⚙️",
-  },
-  {
-    number: "06",
-    title: "Cloud & Support",
-    description:
-      "Deployment, maintenance, monitoring, and continuous improvements for your digital products in production.",
-    tags: ["Vercel", "Cloud", "Maintenance"],
-    icon: "☁️",
-  },
-];
-
-// --- UPDATED PROJECTS WITH YOUR SPECIFIC APPS & LINKS ---
-const projects = [
-  {
-    category: "Mobile Application",
-    title: "BeneFittz",
-    description:
-      "A complete rewards and benefits platform for shoppers. Earn, track, and redeem points seamlessly at partner shops.",
-    metrics: ["Live on Stores", "Reward System", "User Friendly"],
-    ios: "https://apps.apple.com/in/app/benefittz/id6746153320",
-    android: "https://play.google.com/store/apps/details?id=com.benefitt.app"
-  },
-  {
-    category: "Mobile Application",
-    title: "Green Vision Cleansing",
-    description:
-      "An employee time-tracking app designed for cleaning businesses to manage worker shifts, locations, and attendance effectively.",
-    metrics: ["Time Tracking", "Shift Management", "Live"],
-    ios: "https://apps.apple.com/in/app/green-vision-cleansing2-0/id6479843416",
-    android: "https://play.google.com/store/apps/details?id=com.green.greencleansing"
-  },
-  {
-    category: "Smart Management (In Dev)",
-    title: "GateNest",
-    description:
-      "A smart apartment guest management system allowing societies to digitally register visitors, manage security logs, and ensure safety.",
-    metrics: ["Guest Logs", "Security", "In Development"],
-    ios: null,
-    android: "https://play.google.com/store/apps/details?id=com.gate.nest"
-  },
-  {
-    category: "Kids Application (In Dev)",
-    title: "Kids FunZone",
-    description:
-      "An interactive and educational mobile app designed for children to learn through fun games, puzzles, and engaging activities.",
-    metrics: ["Interactive UI", "Educational", "In Development"],
-    ios: null,
-    android: "https://play.google.com/store/apps/details?id=com.kids.world"
-  },
-];
-
-const technologies = [
-  { name: "React", color: "#61DAFB" },
-  { name: "Next.js", color: "#000000" },
-  { name: "Flutter", color: "#02569B" },
-  { name: "React Native", color: "#61DAFB" },
-  { name: "Node.js", color: "#339933" },
-  { name: "Java", color: "#007396" },
-  { name: "Android", color: "#3DDC84" },
-  { name: "Firebase", color: "#FFCA28" },
-  { name: "MongoDB", color: "#47A248" },
-  { name: "MySQL", color: "#4479A1" },
-  { name: "REST APIs", color: "#009688" },
-  { name: "Vercel", color: "#000000" },
-];
-
 export default function Home() {
+
+  interface ServiceType {
+  number: string;
+  title: string;
+  description: string;
+  tags: string[];
+  icon: string;
+  fullDescription: string;
+  process: { step: string; detail: string }[];
+}
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [selectedService, setSelectedService] = useState<ServiceType | null>(null);
 
+  // --- Scroll Animation & Navbar Effects ---
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -121,7 +27,6 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // --- NEW: Scroll Animation Logic ---
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -135,10 +40,8 @@ export default function Home() {
       { threshold: 0.15 }
     );
 
-    // Observe all sections that should animate
     const sections = document.querySelectorAll(".animate-on-scroll");
     sections.forEach((el) => observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
 
@@ -148,11 +51,151 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setMenuOpen(false);
+    setSelectedService(null); // Close modal if open
   };
+
+  // --- DATA: Services with Full Details ---
+  const services = [
+    {
+      number: "01",
+      title: "Web Development",
+      description: "High-performance websites and web applications built for startups, businesses and enterprises using modern frameworks.",
+      tags: ["Next.js", "React", "Node.js"],
+      icon: "🌐",
+      fullDescription: "From high-traffic SaaS platforms to sleek corporate websites, we leverage the power of React, Next.js, and Node.js to craft solutions that are blazing fast, SEO-optimized, and conversion-focused. We prioritize clean code and responsive design to ensure your brand looks perfect on every screen.",
+      process: [
+        { step: "Discovery & Strategy", detail: "Understanding your business goals and target audience to create a roadmap." },
+        { step: "UI/UX Design", detail: "Designing wireframes and high-fidelity prototypes that are both beautiful and user-friendly." },
+        { step: "Agile Development", detail: "Building the application using component-based architecture and modern tooling." },
+        { step: "Deployment & SEO", detail: "Launching on Vercel/AWS with full SEO setup, analytics, and performance monitoring." },
+      ]
+    },
+    {
+      number: "02",
+      title: "Mobile App Development",
+      description: "Scalable Android and iOS applications with beautiful interfaces, offline support, and reliable backend systems.",
+      tags: ["Flutter", "React Native", "Android"],
+      icon: "📱",
+      fullDescription: "We build native-quality cross-platform applications using Flutter and React Native, saving you time and money without compromising on performance. Whether you need a customer-facing app or an internal workforce tool, we handle the entire lifecycle—from app store submissions to push notifications.",
+      process: [
+        { step: "Market Research", detail: "Analyzing the app store landscape to define unique features and competitive edge." },
+        { step: "Prototyping", detail: "Interactive mobile-first prototypes to test user flow and navigation." },
+        { step: "Native Integration", detail: "Deep integration with device hardware like GPS, Camera, and Biometrics." },
+        { step: "Launch & ASO", detail: "Publishing to App Store and Google Play with App Store Optimization (ASO)." },
+      ]
+    },
+    {
+      number: "03",
+      title: "UI/UX Design",
+      description: "User-focused digital experiences that combine modern design principles, usability research, and business goals.",
+      tags: ["Figma", "Design Systems", "Prototyping"],
+      icon: "🎨",
+      fullDescription: "Design is not just about how things look—it's about how they work. We use Figma to design intuitive interfaces backed by user research and behavior psychology. We create consistent design systems that scale, ensuring your users stay engaged and delighted at every touchpoint.",
+      process: [
+        { step: "User Research", detail: "Conducting interviews, surveys, and creating empathy maps." },
+        { step: "Information Architecture", detail: "Organizing content and defining clear user paths." },
+        { step: "High-Fidelity Design", detail: "Creating pixel-perfect mockups, animations, and interaction states." },
+        { step: "Usability Testing", detail: "Validating the design with real users to refine the experience." },
+      ]
+    },
+    {
+      number: "04",
+      title: "E-Commerce Solutions",
+      description: "Complete online shopping platforms with integrated payments, inventory management, orders, and customer management.",
+      tags: ["E-Commerce", "Payments", "APIs"],
+      icon: "🛒",
+      fullDescription: "We build robust online stores that turn visitors into customers. By integrating secure payment gateways (Stripe, Razorpay), real-time inventory sync, and order management systems, we give you a complete backend dashboard. We also ensure your checkout flow is optimized for conversion.",
+      process: [
+        { step: "Catalog Architecture", detail: "Setting up categories, product variants, and dynamic pricing rules." },
+        { step: "Payment Integration", detail: "Secure implementation of multiple payment methods (Credit Card, UPI, Paypal)." },
+        { step: "Inventory & Logistics", detail: "Sync warehouse data with your storefront for real-time stock updates." },
+        { step: "Analytics Dashboard", detail: "Building admin panels to track sales, abandoned carts, and customer behavior." },
+      ]
+    },
+    {
+      number: "05",
+      title: "Backend & APIs",
+      description: "Secure and scalable APIs that power mobile apps, websites, and business applications with high performance.",
+      tags: ["REST API", "Node.js", "Database"],
+      icon: "⚙️",
+      fullDescription: "The backend is the engine of your application. We build highly scalable RESTful and GraphQL APIs using Node.js, Python, or Java, ensuring your data flows securely between your database, frontend, and third-party services. We prioritize database optimization, caching, and error handling.",
+      process: [
+        { step: "Data Modeling", detail: "Designing efficient schemas for SQL (MySQL) and NoSQL (MongoDB) databases." },
+        { step: "API Development", detail: "Building robust endpoints with JWT authentication and role-based access." },
+        { step: "Security & Testing", detail: "Implementing rate limiting, data encryption, and unit/integration tests." },
+        { step: "System Monitoring", detail: "Setting up logs and alerts using tools like Sentry and New Relic." },
+      ]
+    },
+    {
+      number: "06",
+      title: "Cloud & Support",
+      description: "Deployment, maintenance, monitoring, and continuous improvements for your digital products in production.",
+      tags: ["Vercel", "Cloud", "Maintenance"],
+      icon: "☁️",
+      fullDescription: "Launching is just the beginning. We offer comprehensive cloud hosting solutions on Vercel, AWS, and Google Cloud. Beyond deployment, we provide 24/7 monitoring, automatic backups, security patches, and continuous feature improvements so you never have to worry about technical downtime.",
+      process: [
+        { step: "Deployment Strategy", detail: "CI/CD pipelines to automatically deploy new code safely." },
+        { step: "Infrastructure Setup", detail: "Configuring server instances, load balancers, and CDNs for speed." },
+        { step: "Ongoing Maintenance", detail: "Fixing bugs, updating libraries, and handling security vulnerabilities." },
+        { step: "Growth Optimization", detail: "Refactoring code and scaling infrastructure as your user base grows." },
+      ]
+    },
+  ];
+
+  // --- DATA: Your Real Projects ---
+  const projects = [
+    {
+      category: "Mobile Application",
+      title: "BeneFittz",
+      description: "A complete rewards and benefits platform for shoppers. Earn, track, and redeem points seamlessly at partner shops.",
+      metrics: ["Live on Stores", "Reward System", "User Friendly"],
+      ios: "https://apps.apple.com/in/app/benefittz/id6746153320",
+      android: "https://play.google.com/store/apps/details?id=com.benefitt.app"
+    },
+    {
+      category: "Mobile Application",
+      title: "Green Vision Cleansing",
+      description: "An employee time-tracking app designed for cleaning businesses to manage worker shifts, locations, and attendance effectively.",
+      metrics: ["Time Tracking", "Shift Management", "Live"],
+      ios: "https://apps.apple.com/in/app/green-vision-cleansing2-0/id6479843416",
+      android: "https://play.google.com/store/apps/details?id=com.green.greencleansing"
+    },
+    {
+      category: "Smart Management (In Dev)",
+      title: "GateNest",
+      description: "A smart apartment guest management system allowing societies to digitally register visitors, manage security logs, and ensure safety.",
+      metrics: ["Guest Logs", "Security", "In Development"],
+      ios: null,
+      android: "https://play.google.com/store/apps/details?id=com.gate.nest"
+    },
+    {
+      category: "Kids Application (In Dev)",
+      title: "Kids FunZone",
+      description: "An interactive and educational mobile app designed for children to learn through fun games, puzzles, and engaging activities.",
+      metrics: ["Interactive UI", "Educational", "In Development"],
+      ios: null,
+      android: "https://play.google.com/store/apps/details?id=com.kids.world"
+    },
+  ];
+
+  const technologies = [
+    { name: "React", color: "#61DAFB" },
+    { name: "Next.js", color: "#000000" },
+    { name: "Flutter", color: "#02569B" },
+    { name: "React Native", color: "#61DAFB" },
+    { name: "Node.js", color: "#339933" },
+    { name: "Java", color: "#007396" },
+    { name: "Android", color: "#3DDC84" },
+    { name: "Firebase", color: "#FFCA28" },
+    { name: "MongoDB", color: "#47A248" },
+    { name: "MySQL", color: "#4479A1" },
+    { name: "REST APIs", color: "#009688" },
+    { name: "Vercel", color: "#000000" },
+  ];
 
   return (
     <main className="min-h-screen bg-white text-zinc-900">
-      {/* NAVBAR - Identical to yours */}
+      {/* NAVBAR */}
       <header
         className={`fixed top-0 z-50 w-full transition-all duration-300 ${
           scrolled
@@ -304,7 +347,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* HERO VISUAL */}
           <div className="flex items-center justify-center">
             <div className="relative w-full max-w-xl">
               <div className="rounded-[2rem] border border-zinc-200 bg-white/80 p-4 shadow-2xl backdrop-blur">
@@ -380,7 +422,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce lg:block">
           <div className="flex flex-col items-center gap-2">
             <span className="text-xs font-medium uppercase tracking-widest text-zinc-400">
@@ -391,7 +432,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* SERVICES SECTION */}
       <section id="services" className="bg-zinc-50/80 py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
@@ -417,7 +458,8 @@ export default function Home() {
             {services.map((service) => (
               <div
                 key={service.number}
-                className="group rounded-2xl bg-white p-8 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
+                onClick={() => setSelectedService(service)}
+                className="group cursor-pointer rounded-2xl bg-white p-8 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-3xl">{service.icon}</span>
@@ -449,6 +491,76 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* MODAL FOR SERVICE DETAILS */}
+      {selectedService && (
+        <div 
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 sm:p-6 transition-opacity duration-300"
+          onClick={() => setSelectedService(null)}
+        >
+          <div 
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setSelectedService(null)}
+              className="absolute right-6 top-6 rounded-full bg-zinc-100 p-2 text-zinc-600 transition hover:bg-zinc-200 hover:text-black"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+
+            <div className="p-8 sm:p-12">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-6xl">{selectedService.icon}</span>
+                <div>
+                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+                    Service {selectedService.number}
+                  </span>
+                  <h2 className="text-4xl font-bold tracking-tight text-zinc-900">
+                    {selectedService.title}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="mb-10 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 p-6 sm:p-10 border border-zinc-100 flex items-center justify-center min-h-[200px]">
+                <div className="text-center">
+                  <div className="text-8xl mb-4 opacity-90">{selectedService.icon}</div>
+                  <h3 className="text-xl font-semibold text-zinc-800">Modern {selectedService.title} Pipeline</h3>
+                  <p className="text-zinc-500">AI-driven workflow automation & design preview</p>
+                </div>
+              </div>
+
+              <p className="text-lg leading-8 text-zinc-700 mb-10 border-b border-zinc-100 pb-10">
+                {selectedService.fullDescription}
+              </p>
+
+              <h3 className="text-xl font-bold text-zinc-900 mb-6">How we execute:</h3>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {selectedService.process.map((step: { step: string; detail: string }, idx: number) => (
+                  <div key={idx} className="flex gap-4 rounded-xl bg-zinc-50 p-5 border border-zinc-100/50">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-zinc-800">{step.step}</h4>
+                      <p className="text-sm text-zinc-500 mt-1">{step.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-10 flex justify-end border-t border-zinc-100 pt-8">
+                <button
+                  onClick={() => { setSelectedService(null); scrollToSection("contact"); }}
+                  className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:scale-105"
+                >
+                  Discuss this Service →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* SOLUTIONS */}
       <section id="solutions" className="py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
@@ -507,7 +619,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROJECTS - Now with your specific apps & buttons */}
+      {/* PROJECTS */}
       <section id="projects" className="bg-zinc-950 py-24 text-white animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
@@ -567,7 +679,6 @@ export default function Home() {
                     ))}
                   </div>
 
-                  {/* --- NEW: Actual Store Buttons --- */}
                   <div className="mt-6 flex flex-wrap gap-3">
                     {project.android && (
                       <a 
@@ -686,7 +797,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA / CONTACT */}
+      {/* CONTACT */}
       <section id="contact" className="border-t border-zinc-200 bg-white py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
