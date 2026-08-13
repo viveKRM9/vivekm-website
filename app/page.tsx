@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link"; // Added for multi-page routing
+import Link from "next/link"; 
+import { 
+  SiNextdotjs, SiReact, SiFlutter, SiNodedotjs, SiAndroid, 
+  SiFirebase, SiMongodb, SiMysql, SiVercel, SiFigma, SiStripe, SiTailwindcss 
+} from "react-icons/si";
+import { FaCloud, FaGear, FaCartShopping } from "react-icons/fa6";
 
 export default function Home() {
 
@@ -9,7 +14,7 @@ export default function Home() {
     number: string;
     title: string;
     description: string;
-    tags: string[];
+    tags: { name: string; icon: React.ElementType; color: string }[]; // Changed tags to objects
     icon: string;
     fullDescription: string;
     process: { step: string; detail: string }[];
@@ -52,16 +57,20 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setMenuOpen(false);
-    setSelectedService(null); // Close modal if open
+    setSelectedService(null); 
   };
 
-  // --- DATA: Services with Full Details ---
+  // --- DATA: Services with Full Details & Tech Logos ---
   const services = [
     {
       number: "01",
       title: "Web Development",
       description: "High-performance websites and web applications built for startups, businesses and enterprises using modern frameworks.",
-      tags: ["Next.js", "React", "Node.js"],
+      tags: [
+        { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+        { name: "React", icon: SiReact, color: "#61DAFB" },
+        { name: "Node.js", icon: SiNodedotjs, color: "#339933" }
+      ],
       icon: "🌐",
       fullDescription: "From high-traffic SaaS platforms to sleek corporate websites, we leverage the power of React, Next.js, and Node.js to craft solutions that are blazing fast, SEO-optimized, and conversion-focused. We prioritize clean code and responsive design to ensure your brand looks perfect on every screen.",
       process: [
@@ -75,7 +84,11 @@ export default function Home() {
       number: "02",
       title: "Mobile App Development",
       description: "Scalable Android and iOS applications with beautiful interfaces, offline support, and reliable backend systems.",
-      tags: ["Flutter", "React Native", "Android"],
+      tags: [
+        { name: "Flutter", icon: SiFlutter, color: "#02569B" },
+        { name: "React Native", icon: SiReact, color: "#61DAFB" },
+        { name: "Android", icon: SiAndroid, color: "#3DDC84" }
+      ],
       icon: "📱",
       fullDescription: "We build native-quality cross-platform applications using Flutter and React Native, saving you time and money without compromising on performance. Whether you need a customer-facing app or an internal workforce tool, we handle the entire lifecycle—from app store submissions to push notifications.",
       process: [
@@ -89,7 +102,11 @@ export default function Home() {
       number: "03",
       title: "UI/UX Design",
       description: "User-focused digital experiences that combine modern design principles, usability research, and business goals.",
-      tags: ["Figma", "Design Systems", "Prototyping"],
+      tags: [
+        { name: "Figma", icon: SiFigma, color: "#F24E1E" },
+        { name: "Tailwind", icon: SiTailwindcss, color: "#38B2AC" },
+        { name: "Prototyping", icon: FaGear, color: "#6B7280" }
+      ],
       icon: "🎨",
       fullDescription: "Design is not just about how things look—it's about how they work. We use Figma to design intuitive interfaces backed by user research and behavior psychology. We create consistent design systems that scale, ensuring your users stay engaged and delighted at every touchpoint.",
       process: [
@@ -103,7 +120,11 @@ export default function Home() {
       number: "04",
       title: "E-Commerce Solutions",
       description: "Complete online shopping platforms with integrated payments, inventory management, orders, and customer management.",
-      tags: ["E-Commerce", "Payments", "APIs"],
+      tags: [
+        { name: "Stripe", icon: SiStripe, color: "#635BFF" },
+        { name: "Payments", icon: FaCartShopping, color: "#F59E0B" },
+        { name: "APIs", icon: FaCloud, color: "#3B82F6" }
+      ],
       icon: "🛒",
       fullDescription: "We build robust online stores that turn visitors into customers. By integrating secure payment gateways (Stripe, Razorpay), real-time inventory sync, and order management systems, we give you a complete backend dashboard. We also ensure your checkout flow is optimized for conversion.",
       process: [
@@ -117,7 +138,11 @@ export default function Home() {
       number: "05",
       title: "Backend & APIs",
       description: "Secure and scalable APIs that power mobile apps, websites, and business applications with high performance.",
-      tags: ["REST API", "Node.js", "Database"],
+      tags: [
+        { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+        { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+        { name: "Node.js", icon: SiNodedotjs, color: "#339933" }
+      ],
       icon: "⚙️",
       fullDescription: "The backend is the engine of your application. We build highly scalable RESTful and GraphQL APIs using Node.js, Python, or Java, ensuring your data flows securely between your database, frontend, and third-party services. We prioritize database optimization, caching, and error handling.",
       process: [
@@ -131,7 +156,11 @@ export default function Home() {
       number: "06",
       title: "Cloud & Support",
       description: "Deployment, maintenance, monitoring, and continuous improvements for your digital products in production.",
-      tags: ["Vercel", "Cloud", "Maintenance"],
+      tags: [
+        { name: "Vercel", icon: SiVercel, color: "#000000" },
+        { name: "Cloud", icon: FaCloud, color: "#3B82F6" },
+        { name: "Maintenance", icon: FaGear, color: "#6B7280" }
+      ],
       icon: "☁️",
       fullDescription: "Launching is just the beginning. We offer comprehensive cloud hosting solutions on Vercel, AWS, and Google Cloud. Beyond deployment, we provide 24/7 monitoring, automatic backups, security patches, and continuous feature improvements so you never have to worry about technical downtime.",
       process: [
@@ -196,7 +225,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white text-zinc-900">
-      {/* NAVBAR - UPDATED FOR MULTI-PAGE */}
+      {/* NAVBAR (Identical to yours) */}
       <header
         className={`fixed top-0 z-50 w-full transition-all duration-300 ${
           scrolled
@@ -206,36 +235,23 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-lg font-bold text-white shadow-lg">
-              VM
-            </div>
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-lg font-bold text-white shadow-lg">VM</div>
             <div>
-              <div className="text-xl font-bold tracking-tight text-zinc-900">
-                VivekM
-              </div>
-              <div className="-mt-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-600">
-                Technologies
-              </div>
+              <div className="text-xl font-bold tracking-tight text-zinc-900">VivekM</div>
+              <div className="-mt-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-600">Technologies</div>
             </div>
           </Link>
 
           <nav className="hidden items-center gap-10 md:flex">
-            {/* These now link to separate pages */}
             <Link href="/services" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">Services</Link>
             <Link href="/solutions" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">Solutions</Link>
             <Link href="/work" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">Projects</Link>
             <Link href="/about" className="text-sm font-medium text-zinc-600 transition-all hover:text-blue-600 hover:after:w-full relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all hover:after:w-full">About</Link>
           </nav>
 
-          <Link href="/contact" className="hidden rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl md:block">
-            Get a Quote
-          </Link>
+          <Link href="/contact" className="hidden rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl md:block">Get a Quote</Link>
 
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-lg border border-zinc-200 px-3 py-2 transition hover:bg-zinc-50 md:hidden"
-            aria-label="Open menu"
-          >
+          <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-lg border border-zinc-200 px-3 py-2 transition hover:bg-zinc-50 md:hidden" aria-label="Open menu">
             {menuOpen ? "✕" : "☰"}
           </button>
         </div>
@@ -266,35 +282,23 @@ export default function Home() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
               </span>
-              <span className="text-blue-700">
-                Digital Technology & Development Partner
-              </span>
+              <span className="text-blue-700">Digital Technology & Development Partner</span>
             </div>
 
             <h1 className="max-w-4xl text-5xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
               We build digital products that
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {" "}
-                move businesses
-              </span>{" "}
-              forward.
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> move businesses</span> forward.
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-8 text-zinc-600">
-              VivekM Technologies helps businesses transform ideas into
-              powerful websites, mobile applications, and scalable software
-              solutions with modern technology.
+              VivekM Technologies helps businesses transform ideas into powerful websites, mobile applications, and scalable software solutions with modern technology.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="group rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3.5 text-center font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
-                Start a Project
-                <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
+                Start a Project <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
               </Link>
-
-              <Link href="/services" className="rounded-full border border-zinc-300 px-8 py-3.5 text-center font-semibold transition-all hover:border-blue-600 hover:bg-blue-50">
-                Explore Services
-              </Link>
+              <Link href="/services" className="rounded-full border border-zinc-300 px-8 py-3.5 text-center font-semibold transition-all hover:border-blue-600 hover:bg-blue-50">Explore Services</Link>
             </div>
 
             <div className="mt-12 flex flex-wrap gap-x-12 gap-y-5 border-t border-zinc-200 pt-7">
@@ -305,9 +309,7 @@ export default function Home() {
                 { label: "24/7", value: "Support" },
               ].map((item) => (
                 <div key={item.label}>
-                  <div className="text-2xl font-bold text-blue-600">
-                    {item.label}
-                  </div>
+                  <div className="text-2xl font-bold text-blue-600">{item.label}</div>
                   <div className="text-sm text-zinc-500">{item.value}</div>
                 </div>
               ))}
@@ -324,65 +326,37 @@ export default function Home() {
                       <span className="h-3 w-3 rounded-full bg-zinc-700" />
                       <span className="h-3 w-3 rounded-full bg-zinc-700" />
                     </div>
-                    <span className="text-xs font-semibold text-blue-400">
-                      VIVEKM TECHNOLOGIES
-                    </span>
+                    <span className="text-xs font-semibold text-blue-400">VIVEKM TECHNOLOGIES</span>
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="rounded-2xl bg-white/10 p-6 backdrop-blur">
-                      <div className="mb-10 text-sm font-medium text-zinc-500">
-                        DIGITAL PRODUCT
-                      </div>
-                      <div className="text-3xl font-bold text-white">
-                        Idea
-                        <br />
-                        <span className="text-blue-400">→ Product</span>
-                      </div>
+                      <div className="mb-10 text-sm font-medium text-zinc-500">DIGITAL PRODUCT</div>
+                      <div className="text-3xl font-bold text-white">Idea<br /><span className="text-blue-400">→ Product</span></div>
                     </div>
-
                     <div className="rounded-2xl bg-blue-600/20 p-6 backdrop-blur">
-                      <div className="mb-10 text-sm text-zinc-400">
-                        TECHNOLOGY
-                      </div>
-                      <div className="text-3xl font-bold text-white">
-                        Design
-                        <br />
-                        <span className="text-blue-400">+ Code</span>
-                      </div>
+                      <div className="mb-10 text-sm text-zinc-400">TECHNOLOGY</div>
+                      <div className="text-3xl font-bold text-white">Design<br /><span className="text-blue-400">+ Code</span></div>
                     </div>
                   </div>
 
                   <div className="mt-4 rounded-2xl border border-zinc-800 p-6">
-                    <div className="mb-3 text-sm text-zinc-500">
-                      OUR APPROACH
-                    </div>
+                    <div className="mb-3 text-sm text-zinc-500">OUR APPROACH</div>
                     <div className="flex items-center justify-between text-sm text-zinc-300">
-                      <span className="text-white">Strategy</span>
-                      <span className="text-blue-400">→</span>
-                      <span className="text-white">Design</span>
-                      <span className="text-blue-400">→</span>
-                      <span className="text-white">Build</span>
-                      <span className="text-blue-400">→</span>
+                      <span className="text-white">Strategy</span><span className="text-blue-400">→</span>
+                      <span className="text-white">Design</span><span className="text-blue-400">→</span>
+                      <span className="text-white">Build</span><span className="text-blue-400">→</span>
                       <span className="text-white">Grow</span>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div className="absolute -bottom-5 -left-5 rounded-2xl border border-zinc-200 bg-white px-6 py-4 shadow-xl">
-                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                  Built for
-                </div>
-                <div className="mt-1 font-bold text-zinc-900">
-                  Modern Businesses
-                </div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Built for</div>
+                <div className="mt-1 font-bold text-zinc-900">Modern Businesses</div>
               </div>
-
               <div className="absolute -right-5 -top-5 rounded-2xl border border-zinc-200 bg-white px-6 py-4 shadow-xl">
-                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                  Trusted by
-                </div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Trusted by</div>
                 <div className="mt-1 font-bold text-zinc-900">100+ Clients</div>
               </div>
             </div>
@@ -391,33 +365,23 @@ export default function Home() {
 
         <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce lg:block">
           <div className="flex flex-col items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-widest text-zinc-400">
-              Scroll
-            </span>
+            <span className="text-xs font-medium uppercase tracking-widest text-zinc-400">Scroll</span>
             <div className="h-8 w-0.5 rounded-full bg-gradient-to-b from-blue-500 to-transparent" />
           </div>
         </div>
       </section>
 
-      {/* SERVICES SECTION - KEEPING BUTTON CLICKS FOR MODAL, BUT LINKING TO FULL PAGE VIA HEADER */}
+      {/* SERVICES SECTION */}
       <section id="services" className="bg-zinc-50/80 py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-              What we do
-            </p>
-
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">What we do</p>
             <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-              Technology services built around
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                your business
-              </span>
+              Technology services built around<br />
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">your business</span>
             </h2>
-
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-zinc-600">
-              From the first idea to production and beyond, we provide the
-              technology expertise required to build and grow digital products.
+              From the first idea to production and beyond, we provide the technology expertise required to build and grow digital products.
             </p>
           </div>
 
@@ -430,26 +394,15 @@ export default function Home() {
               >
                 <div className="flex items-center justify-between">
                   <span className="text-3xl">{service.icon}</span>
-                  <span className="text-sm font-bold text-zinc-400 group-hover:text-blue-600">
-                    {service.number}
-                  </span>
+                  <span className="text-sm font-bold text-zinc-400 group-hover:text-blue-600">{service.number}</span>
                 </div>
-
-                <h3 className="mt-8 text-2xl font-bold group-hover:text-blue-600">
-                  {service.title}
-                </h3>
-
-                <p className="mt-4 leading-7 text-zinc-600">
-                  {service.description}
-                </p>
-
+                <h3 className="mt-8 text-2xl font-bold group-hover:text-blue-600">{service.title}</h3>
+                <p className="mt-4 leading-7 text-zinc-600">{service.description}</p>
                 <div className="mt-7 flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 group-hover:bg-blue-50 group-hover:text-blue-600"
-                    >
-                      {tag}
+                  {/* Only render text on the main card to keep it clean */}
+                  {service.tags.map((tag, i) => (
+                    <span key={i} className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 group-hover:bg-blue-50 group-hover:text-blue-600">
+                      {tag.name}
                     </span>
                   ))}
                 </div>
@@ -459,7 +412,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MODAL FOR SERVICE DETAILS */}
+      {/* MODAL FOR SERVICE DETAILS (With NEW Animated Logos) */}
       {selectedService && (
         <div 
           className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 sm:p-6 transition-opacity duration-300"
@@ -480,12 +433,8 @@ export default function Home() {
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-6xl">{selectedService.icon}</span>
                 <div>
-                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-                    Service {selectedService.number}
-                  </span>
-                  <h2 className="text-4xl font-bold tracking-tight text-zinc-900">
-                    {selectedService.title}
-                  </h2>
+                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">Service {selectedService.number}</span>
+                  <h2 className="text-4xl font-bold tracking-tight text-zinc-900">{selectedService.title}</h2>
                 </div>
               </div>
 
@@ -501,13 +450,26 @@ export default function Home() {
                 {selectedService.fullDescription}
               </p>
 
+              {/* --- NEW LOGO GRID WITH ANIMATION --- */}
+              <h3 className="text-xl font-bold text-zinc-900 mb-6">Powered By:</h3>
+              <div className="flex flex-wrap gap-3 mb-10">
+                {selectedService.tags.map((tag, idx) => (
+                  <div 
+                    key={idx} 
+                    className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 animate-in fade-in slide-in-from-bottom-4 duration-500"
+                    style={{ animationDelay: `${idx * 100}ms` }} // Staggered animation effect
+                  >
+                    <tag.icon className="text-lg" style={{ color: tag.color }} />
+                    {tag.name}
+                  </div>
+                ))}
+              </div>
+
               <h3 className="text-xl font-bold text-zinc-900 mb-6">How we execute:</h3>
               <div className="grid gap-4 sm:grid-cols-2">
-                {selectedService.process.map((step: { step: string; detail: string }, idx: number) => (
+                {selectedService.process.map((step, idx) => (
                   <div key={idx} className="flex gap-4 rounded-xl bg-zinc-50 p-5 border border-zinc-100/50">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold">
-                      {idx + 1}
-                    </div>
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold">{idx + 1}</div>
                     <div>
                       <h4 className="font-semibold text-zinc-800">{step.step}</h4>
                       <p className="text-sm text-zinc-500 mt-1">{step.detail}</p>
@@ -534,23 +496,14 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-                Built to scale
-              </p>
-
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">Built to scale</p>
               <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-                From a simple idea to a
-                <br />
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  complete digital platform
-                </span>
+                From a simple idea to a<br />
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">complete digital platform</span>
               </h2>
-
               <p className="mt-6 text-lg leading-8 text-zinc-600">
-                We combine product thinking, design, and engineering to create
-                solutions that are reliable today and ready for tomorrow.
+                We combine product thinking, design, and engineering to create solutions that are reliable today and ready for tomorrow.
               </p>
-
               <Link href="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
                 Discuss your idea →
               </Link>
@@ -563,19 +516,10 @@ export default function Home() {
                 ["03", "Develop", "Build secure, scalable and maintainable software."],
                 ["04", "Launch", "Deploy, monitor and continuously improve."],
               ].map(([number, title, description]) => (
-                <div
-                  key={number}
-                  className="group rounded-3xl border border-zinc-200 p-7 transition-all hover:border-blue-200 hover:shadow-lg"
-                >
-                  <span className="text-sm font-bold text-blue-600">
-                    {number}
-                  </span>
-                  <h3 className="mt-8 text-xl font-bold group-hover:text-blue-600">
-                    {title}
-                  </h3>
-                  <p className="mt-3 leading-6 text-zinc-600">
-                    {description}
-                  </p>
+                <div key={number} className="group rounded-3xl border border-zinc-200 p-7 transition-all hover:border-blue-200 hover:shadow-lg">
+                  <span className="text-sm font-bold text-blue-600">{number}</span>
+                  <h3 className="mt-8 text-xl font-bold group-hover:text-blue-600">{title}</h3>
+                  <p className="mt-3 leading-6 text-zinc-600">{description}</p>
                 </div>
               ))}
             </div>
@@ -588,79 +532,42 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400">
-                Selected work
-              </p>
-
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400">Selected work</p>
               <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-                Solutions that solve
-                <br />
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  real business problems
-                </span>
+                Solutions that solve<br />
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">real business problems</span>
               </h2>
             </div>
-
             <p className="max-w-md text-zinc-400">
-              We build digital products across industries, adapting the
-              technology to the business rather than the other way around.
+              We build digital products across industries, adapting the technology to the business rather than the other way around.
             </p>
           </div>
 
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
             {projects.map((project, index) => (
-              <div
-                key={project.title}
-                className="group overflow-hidden rounded-3xl border border-zinc-800 transition-all hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10"
-              >
+              <div key={project.title} className="group overflow-hidden rounded-3xl border border-zinc-800 transition-all hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10">
                 <div className="relative flex h-56 items-end bg-gradient-to-br from-zinc-800 via-zinc-900 to-black p-7">
-                  <div className="absolute right-4 top-4 text-6xl font-bold text-white/5">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
+                  <div className="absolute right-4 top-4 text-6xl font-bold text-white/5">{String(index + 1).padStart(2, "0")}</div>
                   <div>
-                    <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-400">
-                      {project.category}
-                    </div>
-                    <div className="text-2xl font-bold text-white">
-                      {project.title}
-                    </div>
+                    <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-400">{project.category}</div>
+                    <div className="text-2xl font-bold text-white">{project.title}</div>
                   </div>
                 </div>
-
                 <div className="p-7">
-                  <p className="leading-7 text-zinc-400">
-                    {project.description}
-                  </p>
-
+                  <p className="leading-7 text-zinc-400">{project.description}</p>
                   <div className="mt-6 flex flex-wrap gap-2">
                     {project.metrics.map((metric) => (
-                      <span
-                        key={metric}
-                        className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400"
-                      >
-                        {metric}
-                      </span>
+                      <span key={metric} className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400">{metric}</span>
                     ))}
                   </div>
-
                   <div className="mt-6 flex flex-wrap gap-3">
                     {project.android && (
-                      <a 
-                        href={project.android} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-green-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-green-500"
-                      >
+                      <a href={project.android} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-green-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-green-500">
                         <span>▶</span> Play Store
                       </a>
                     )}
                     {project.ios && (
-                      <a 
-                        href={project.ios} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-zinc-700 px-4 py-2 text-xs font-semibold text-white transition hover:bg-zinc-600"
-                      >
+                      <a href={project.ios} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-zinc-700 px-4 py-2 text-xs font-semibold text-white transition hover:bg-zinc-600">
                         <span></span> App Store
                       </a>
                     )}
@@ -679,25 +586,15 @@ export default function Home() {
       <section className="border-b border-zinc-200 py-20 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-              Technology expertise
-            </p>
-
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">Technology expertise</p>
             <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-              Modern technology.
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Practical solutions.
-              </span>
+              Modern technology.<br />
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Practical solutions.</span>
             </h2>
           </div>
-
           <div className="mt-12 flex flex-wrap justify-center gap-3">
             {technologies.map((tech) => (
-              <span
-                key={tech.name}
-                className="rounded-full border border-zinc-200 bg-white px-5 py-3 text-sm font-medium text-zinc-700 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600"
-              >
+              <span key={tech.name} className="rounded-full border border-zinc-200 bg-white px-5 py-3 text-sm font-medium text-zinc-700 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600">
                 {tech.name}
               </span>
             ))}
@@ -711,31 +608,17 @@ export default function Home() {
           <div className="rounded-[2rem] bg-gradient-to-br from-zinc-50 to-blue-50/50 p-8 sm:p-12 lg:p-16">
             <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-                  About VivekM
-                </p>
-
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">About VivekM</p>
                 <h2 className="mt-4 text-4xl font-bold tracking-tight">
-                  Your technology partner for
-                  <br />
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    the digital era.
-                  </span>
+                  Your technology partner for<br />
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">the digital era.</span>
                 </h2>
               </div>
-
               <div>
-                <p className="text-xl leading-9 text-zinc-700">
-                  VivekM Technologies is a software development company focused
-                  on helping businesses turn ideas into dependable digital products.
-                </p>
-
+                <p className="text-xl leading-9 text-zinc-700">VivekM Technologies is a software development company focused on helping businesses turn ideas into dependable digital products.</p>
                 <p className="mt-6 leading-8 text-zinc-600">
-                  Whether you need a business website, mobile application, custom
-                  software, API integration, or ongoing technical support, we work
-                  closely with you from concept to launch and beyond.
+                  Whether you need a business website, mobile application, custom software, API integration, or ongoing technical support, we work closely with you from concept to launch and beyond.
                 </p>
-
                 <div className="mt-9 grid gap-6 sm:grid-cols-3">
                   {[
                     ["01", "Business-first thinking", "We align technology with your business goals"],
@@ -743,15 +626,9 @@ export default function Home() {
                     ["03", "Long-term partnership", "We support you beyond launch"],
                   ].map(([number, title, description]) => (
                     <div key={number} className="rounded-2xl bg-white/50 p-5">
-                      <div className="text-2xl font-bold text-blue-600">
-                        {number}
-                      </div>
-                      <div className="mt-2 font-semibold text-zinc-900">
-                        {title}
-                      </div>
-                      <div className="mt-1 text-sm text-zinc-500">
-                        {description}
-                      </div>
+                      <div className="text-2xl font-bold text-blue-600">{number}</div>
+                      <div className="mt-2 font-semibold text-zinc-900">{title}</div>
+                      <div className="mt-1 text-sm text-zinc-500">{description}</div>
                     </div>
                   ))}
                 </div>
@@ -764,43 +641,22 @@ export default function Home() {
       {/* CONTACT */}
       <section id="contact" className="border-t border-zinc-200 bg-white py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-            Start a conversation
-          </p>
-
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">Start a conversation</p>
           <h2 className="mt-5 text-5xl font-bold tracking-tight sm:text-6xl">
-            Have an idea?
-            <br />
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Let&apos;s build it.
-            </span>
+            Have an idea?<br />
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Let&apos;s build it.</span>
           </h2>
-
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
-            Tell us what you are building and what you need. We&apos;ll help you find
-            the right technology and development approach for your project.
+            Tell us what you are building and what you need. We&apos;ll help you find the right technology and development approach for your project.
           </p>
-
           <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-            <a
-              href="https://api.whatsapp.com/send?phone=919693427671&text=Hello%20VivekM%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-full bg-gradient-to-r from-green-500 to-green-600 px-8 py-3.5 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
-            >
-              <span className="mr-2">💬</span>
-              WhatsApp Us
+            <a href="https://api.whatsapp.com/send?phone=919693427671&text=Hello%20VivekM%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group rounded-full bg-gradient-to-r from-green-500 to-green-600 px-8 py-3.5 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
+              <span className="mr-2">💬</span> WhatsApp Us
             </a>
-
-            <a
-              href="mailto:rncvivek@gmail.com?subject=Project%20Enquiry%20-%20VivekM%20Technologies"
-              className="rounded-full border border-zinc-300 px-8 py-3.5 font-semibold transition-all hover:border-blue-600 hover:bg-blue-50"
-            >
-              <span className="mr-2">✉️</span>
-              Email Us
+            <a href="mailto:rncvivek@gmail.com?subject=Project%20Enquiry%20-%20VivekM%20Technologies" className="rounded-full border border-zinc-300 px-8 py-3.5 font-semibold transition-all hover:border-blue-600 hover:bg-blue-50">
+              <span className="mr-2">✉️</span> Email Us
             </a>
           </div>
-
           <div className="mt-12 flex justify-center gap-8 text-sm text-zinc-500">
             <span>📞 +91 9693427671</span>
             <span>📍 Faridabad, Haryana, India</span>
@@ -814,49 +670,21 @@ export default function Home() {
           <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-lg font-bold text-white shadow-lg">
-                  VM
-                </div>
-
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-lg font-bold text-white shadow-lg">VM</div>
                 <div>
-                  <div className="text-xl font-bold tracking-tight">
-                    VivekM Technologies
-                  </div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.15em] text-blue-400">
-                    Digital Solutions & Development
-                  </div>
+                  <div className="text-xl font-bold tracking-tight">VivekM Technologies</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.15em] text-blue-400">Digital Solutions & Development</div>
                 </div>
               </div>
-
-              <p className="mt-6 max-w-md leading-7 text-zinc-400">
-                Building modern websites, mobile applications, and software
-                solutions that help businesses grow in the digital era.
-              </p>
-
+              <p className="mt-6 max-w-md leading-7 text-zinc-400">Building modern websites, mobile applications, and software solutions that help businesses grow in the digital era.</p>
               <div className="mt-6 flex gap-4">
-                <a
-                  href="https://api.whatsapp.com/send?phone=919693427671"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-green-600/20 p-2.5 text-green-400 transition hover:bg-green-600 hover:text-white"
-                  aria-label="WhatsApp"
-                >
-                  💬
-                </a>
-                <a
-                  href="mailto:rncvivek@gmail.com"
-                  className="rounded-full bg-blue-600/20 p-2.5 text-blue-400 transition hover:bg-blue-600 hover:text-white"
-                  aria-label="Email"
-                >
-                  ✉️
-                </a>
+                <a href="https://api.whatsapp.com/send?phone=919693427671" target="_blank" rel="noopener noreferrer" className="rounded-full bg-green-600/20 p-2.5 text-green-400 transition hover:bg-green-600 hover:text-white" aria-label="WhatsApp">💬</a>
+                <a href="mailto:rncvivek@gmail.com" className="rounded-full bg-blue-600/20 p-2.5 text-blue-400 transition hover:bg-blue-600 hover:text-white" aria-label="Email">✉️</a>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">
-                Services
-              </h3>
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">Services</h3>
               <div className="mt-5 space-y-3 text-sm text-zinc-400">
                 <Link href="/services" className="block hover:text-white transition">Web Development</Link>
                 <Link href="/services" className="block hover:text-white transition">Mobile App Development</Link>
@@ -867,26 +695,10 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">
-                Contact
-              </h3>
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">Contact</h3>
               <div className="mt-5 space-y-3 text-sm text-zinc-400">
-                <a
-                  href="mailto:rncvivek@gmail.com"
-                  className="block hover:text-white transition"
-                >
-                  rncvivek@gmail.com
-                </a>
-
-                <a
-                  href="https://api.whatsapp.com/send?phone=919693427671"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:text-white transition"
-                >
-                  +91 9693427671
-                </a>
-
+                <a href="mailto:rncvivek@gmail.com" className="block hover:text-white transition">rncvivek@gmail.com</a>
+                <a href="https://api.whatsapp.com/send?phone=919693427671" target="_blank" rel="noopener noreferrer" className="block hover:text-white transition">+91 9693427671</a>
                 <div>Faridabad, Haryana</div>
                 <div>India</div>
               </div>
@@ -895,25 +707,15 @@ export default function Home() {
 
           <div className="mt-12 border-t border-zinc-800 pt-7 text-sm text-zinc-500">
             <div className="flex flex-col justify-between gap-4 sm:flex-row">
-              <span>
-                © {new Date().getFullYear()} VivekM Technologies. All rights reserved.
-              </span>
-              <span className="text-xs tracking-widest">
-                BUILT WITH ❤️ IN INDIA
-              </span>
+              <span>© {new Date().getFullYear()} VivekM Technologies. All rights reserved.</span>
+              <span className="text-xs tracking-widest">BUILT WITH ❤️ IN INDIA</span>
             </div>
           </div>
         </div>
       </footer>
 
       {/* FLOATING WHATSAPP */}
-      <a
-        href="https://api.whatsapp.com/send?phone=919693427671&text=Hello%20VivekM%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project."
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with VivekM Technologies on WhatsApp"
-        className="group fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 text-3xl text-white shadow-2xl transition-all hover:scale-110 hover:shadow-green-500/50"
-      >
+      <a href="https://api.whatsapp.com/send?phone=919693427671&text=Hello%20VivekM%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 text-3xl text-white shadow-2xl transition-all hover:scale-110 hover:shadow-green-500/50">
         <span className="absolute inset-0 animate-ping rounded-full bg-green-500/30" />
         <span className="relative">💬</span>
       </a>
