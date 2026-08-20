@@ -86,6 +86,7 @@ interface ProjectData {
   games?: Game[];
   cartoons?: Cartoon[];
 }
+
 // ============================================
 // PROJECT DATA
 // ============================================
@@ -519,7 +520,7 @@ const gateNestData: ProjectData = {
 };
 
 // 5. SITTERBOSS
-const sitterBossData = {
+const sitterBossData: ProjectData = {
   slug: "sitterboss",
   title: "SitterBoss",
   category: "Babysitter Booking Platform",
@@ -626,6 +627,94 @@ const sitterBossData = {
   color: "from-blue-500 to-indigo-500",
 };
 
+// 6. E WOMEN NETWORK
+const eWomenData: ProjectData = {
+  slug: "ewomen",
+  title: "eWomen Network",
+  category: "Mobile Application",
+  status: "Live on Stores",
+  overview: "A networking platform for women entrepreneurs and business owners. Connect, collaborate, and access success strategies from premier success coaches to achieve business growth and success.",
+  myRole: "Mobile Application Developer - Built both Android and iOS native apps, integrated Firebase backend, implemented community features and coaching modules.",
+  technologies: [
+    { name: "Native Android", icon: SiAndroid, color: "#3DDC84" },
+    { name: "Native iOS", icon: SiApple, color: "#A2AAAD" },
+    { name: "Kotlin", icon: SiKotlin, color: "#7F52FF" },
+    { name: "Swift", icon: SiSwift, color: "#F05138" },
+    { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
+    { name: "REST APIs", icon: BiSupport, color: "#6B7280" },
+  ],
+  features: [
+    { icon: <FaUserFriends className="text-2xl" />, title: "Networking", description: "Connect and collaborate with women entrepreneurs" },
+    { icon: <FaGift className="text-2xl" />, title: "Community Building", description: "Create and join interest-based groups" },
+    { icon: <FaTrophy className="text-2xl" />, title: "Success Coaching", description: "Access to premier success coaches and strategies" },
+    { icon: <MdDashboard className="text-2xl" />, title: "Event Management", description: "Discover and register for networking events" },
+    { icon: <MdSavings className="text-2xl" />, title: "Business Resources", description: "Curated resources for business growth" },
+    { icon: <FaShieldAlt className="text-2xl" />, title: "Entrepreneur Support", description: "Mentorship and peer support system" },
+  ],
+  challenges: [
+    {
+      title: "Building two separate native apps",
+      description: "Had to maintain codebases for both Android and iOS with consistent features."
+    },
+    {
+      title: "Real-time community features",
+      description: "Implementing seamless networking and communication between entrepreneurs."
+    },
+    {
+      title: "Content management",
+      description: "Handling dynamic coaching content and resources for users."
+    },
+    {
+      title: "User engagement",
+      description: "Building features that keep entrepreneurs active and connected."
+    },
+  ],
+  solution: {
+    title: "Native Mobile Solution",
+    description: "Built native apps for Android and iOS with shared Firebase backend, implementing real-time community features and coaching content.",
+    steps: [
+      {
+        title: "Native Android Development",
+        description: "Built with Kotlin using MVVM architecture for robust Android experience."
+      },
+      {
+        title: "Native iOS Development",
+        description: "Built with Swift and UIKit for seamless iOS experience."
+      },
+      {
+        title: "Firebase Backend",
+        description: "Firebase for authentication, data storage, and push notifications."
+      },
+      {
+        title: "Community Features",
+        description: "Real-time networking, group creation, and event management."
+      },
+      {
+        title: "Coaching Content",
+        description: "Dynamic content management with Cloud Functions."
+      },
+    ]
+  },
+  results: [
+    "✅ Live on both Google Play and App Store",
+    "✅ Enables women entrepreneurs to connect globally",
+    "✅ Accessible coaching resources for business growth",
+  ],
+  screenshots: [
+    { src: "/images/ewomen/home.jpeg", alt: "Home Screen" },
+    { src: "/images/ewomen/network.jpeg", alt: "Networking Screen" },
+    { src: "/images/ewomen/coaching.jpeg", alt: "Coaching Module" },
+    { src: "/images/ewomen/events.jpeg", alt: "Events" },
+    { src: "/images/ewomen/profile.jpeg", alt: "Profile" },
+    { src: "/images/ewomen/resources.jpeg", alt: "Business Resources" },
+  ],
+  storeLinks: {
+    android: "https://play.google.com/store/apps/details?id=com.ewomennetwork",
+    ios: "https://apps.apple.com/in/app/ewomennetwork/id1625056796",
+  },
+  color: "from-pink-500 to-rose-500",
+};
+
 // ============================================
 // PROJECT DATA MAP
 // ============================================
@@ -635,6 +724,7 @@ const projectDataMap: Record<string, ProjectData> = {
   "green-vision-cleansing": greenVisionData,
   "gatenest": gateNestData,
   "sitterboss": sitterBossData,
+  "ewomen": eWomenData,
 };
 
 // ============================================
@@ -767,15 +857,6 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                   <p className="text-xs text-zinc-500">Screenshot {index + 1}</p>
                   <p className="text-[10px] text-zinc-400 mt-1">{screenshot.alt}</p>
                 </div>
-                {/* When you have actual images, uncomment this:
-                <Image 
-                  src={screenshot.src} 
-                  alt={screenshot.alt}
-                  width={300}
-                  height={533}
-                  className="object-cover w-full h-full"
-                />
-                */}
               </div>
             ))}
           </div>
@@ -804,7 +885,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
             <div>
               <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">Technologies</h2>
             </div>
-             <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3">
               {project.technologies.map((tech: Technology) => (
                 <span key={tech.name} className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2.5 text-sm font-medium text-zinc-700 shadow-sm">
                   <tech.icon className="text-lg" style={{ color: tech.color }} />
@@ -823,7 +904,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
             <div>
               <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">Key Features</h2>
             </div>
-             <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {project.features.map((feature: Feature, index: number) => (
                 <div key={index} className="rounded-xl bg-zinc-50 p-5 border border-zinc-100">
                   <div className="text-blue-500 mb-2">{feature.icon}</div>
