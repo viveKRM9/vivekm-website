@@ -250,7 +250,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
           <Link href="/" className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-lg font-bold text-white shadow-lg">V</div>
             <div>
-              <div className="text-xl font-bold tracking-tight text-zinc-900">Vivek M</div>
+              <div className="text-xl font-bold tracking-tight text-zinc-900">Vivek Kumar</div>
               <div className="-mt-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-600">Mobile Developer</div>
             </div>
           </Link>
@@ -361,9 +361,9 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
             <div className="mt-12 flex flex-wrap gap-x-12 gap-y-5 border-t border-zinc-200 pt-7">
               {[
-                { label: "Apps Built", value: "6+" },
+                { label: "Apps Built", value: "10+" },
                 { label: "Platforms", value: "iOS & Android" },
-                { label: "Experience", value: "4+ Years" },
+                { label: "Experience", value: "6+ Years" },
                 { label: "Available", value: "Now" },
               ].map((item) => (
                 <div key={item.label}>
@@ -836,7 +836,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
               <div className="flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-lg font-bold text-white shadow-lg">V</div>
                 <div>
-                  <div className="text-xl font-bold tracking-tight">Vivek M</div>
+                  <div className="text-xl font-bold tracking-tight">Vivek Kumar</div>
                   <div className="text-xs font-semibold uppercase tracking-[0.15em] text-blue-400">Mobile Developer</div>
                 </div>
               </div>
@@ -873,7 +873,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
           <div className="mt-12 border-t border-zinc-800 pt-7 text-sm text-zinc-500">
             <div className="flex flex-col justify-between gap-4 sm:flex-row">
-              <span>© {new Date().getFullYear()} Vivek M. All rights reserved.</span>
+              <span>© {new Date().getFullYear()} Vivek Kumar. All rights reserved.</span>
               <span className="text-xs tracking-widest">BUILT WITH ❤️ IN INDIA</span>
             </div>
           </div>
