@@ -1,9 +1,9 @@
 // app/projects/[slug]/page.tsx
 // This is a Server Component - NO "use client"
-
+import Link from "next/link";
 import ProjectDetailClient from './ProjectDetailClient';
 import { projectDataMap } from './data';
-import Link from "next/link";
+
 // Generate static paths at build time
 export function generateStaticParams() {
   return [
@@ -17,8 +17,14 @@ export function generateStaticParams() {
 }
 
 // Server Component - fetches data and passes to client
-export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
-  const project = projectDataMap[params.slug];
+export default async function ProjectDetailPage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  // ✅ Await the params Promise
+  const { slug } = await params;
+  const project = projectDataMap[slug];
   
   if (!project) {
     return (

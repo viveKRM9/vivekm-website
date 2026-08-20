@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
@@ -72,7 +72,7 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
           <Link href="/" className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-lg font-bold text-white shadow-lg">V</div>
             <div>
-              <div className="text-xl font-bold tracking-tight text-zinc-900">Vivek M</div>
+              <div className="text-xl font-bold tracking-tight text-zinc-900">Vivek Kumar</div>
               <div className="-mt-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-600">Mobile Developer</div>
             </div>
           </Link>
@@ -146,22 +146,26 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
 
       {/* SCREENSHOTS */}
       <section className="py-12 bg-zinc-50/80">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600 mb-6">Screenshots</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {project.screenshots.map((screenshot: Screenshot, index: number) => (
-              <div key={index} className="aspect-[9/16] rounded-xl bg-zinc-200 overflow-hidden border border-zinc-200 flex items-center justify-center">
-                <div className="text-center p-4">
-                  <div className="text-4xl mb-2">📱</div>
-                  <p className="text-xs text-zinc-500">Screenshot {index + 1}</p>
-                  <p className="text-[10px] text-zinc-400 mt-1">{screenshot.alt}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-sm text-zinc-500 text-center">* Add actual screenshots to this section</p>
+  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600 mb-6">Screenshots</h2>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {project.screenshots.map((screenshot: Screenshot, index: number) => (
+        <div 
+          key={index} 
+          className="aspect-[9/16] rounded-xl bg-zinc-200 overflow-hidden border border-zinc-200 flex items-center justify-center"
+        >
+          <Image
+            src={screenshot.src}
+            alt={screenshot.alt}
+            width={300}
+            height={533}
+            className="object-cover w-full h-full"
+          />
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* MY ROLE */}
       <section className="py-12">
@@ -326,7 +330,7 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
       <footer className="bg-zinc-950 text-white">
         <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
           <div className="flex flex-col justify-between gap-4 sm:flex-row">
-            <span>© {new Date().getFullYear()} Vivek M. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Vivek Kumar. All rights reserved.</span>
             <span className="text-xs tracking-widest">BUILT WITH ❤️ IN INDIA</span>
           </div>
         </div>
