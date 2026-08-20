@@ -121,7 +121,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   ios: "https://apps.apple.com/in/app/ewomennetwork/id1625056796",
   android: "https://play.google.com/store/apps/details?id=com.ewomennetwork",
   status: "live",
-  isFeatured: true,
+  isFeatured: false,
   color: "from-pink-500 to-rose-500",
   slug: "ewomen-network"  // ← ADD THIS
 },
@@ -145,7 +145,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   ios: "https://testflight.apple.com/join/RTFHr3e8",
   android: null,
   status: "development",
-  isFeatured: true,
+  isFeatured: false,
   color: "from-blue-500 to-indigo-500",
   slug: "sitterboss"
 },
@@ -159,7 +159,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     ios: "https://apps.apple.com/in/app/benefittz/id6746153320",
     android: "https://play.google.com/store/apps/details?id=com.benefitt.app",
     status: "live",
-    isFeatured: false,
+    isFeatured: true,
     color: "from-amber-500 to-orange-500",
     slug: "benefittz" // Add slug for linking
     },
@@ -183,7 +183,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   ios: "https://apps.apple.com/in/app/green-vision-cleansing2-0/id6479843416",
   android: "https://play.google.com/store/apps/details?id=com.green.greencleansing",
   status: "live",
-  isFeatured: false,
+  isFeatured: true,
   color: "from-green-500 to-emerald-500",
   slug: "green-vision-cleansing"
 },
@@ -229,7 +229,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   ios: null,
   android: "https://play.google.com/store/apps/details?id=com.kids.world",
   status: "development",
-  isFeatured: false,
+  isFeatured: true,
   color: "from-cyan-500 to-blue-500",
   slug: "kids-funzone"
 },
@@ -787,10 +787,10 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
               <div className="mt-8 pt-6 border-t border-zinc-800">
                 <a 
-                  href="https://api.whatsapp.com/send?phone=919693427671&text=Hi%20Vivek%2C%20I%20saw%20your%20project%20'${selectedProject.title}'%20and%20I'd%20like%20to%20discuss%20a%20similar%20project." 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+                 href={`https://api.whatsapp.com/send?phone=919693427671&text=Hi%20Vivek%2C%20I%20saw%20your%20project%20'${selectedProject.title}'%20and%20I'd%20like%20to%20discuss%20a%20similar%20project.`}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
                 >
                   Interested in a similar project? Let&apos;s talk →
                 </a>
