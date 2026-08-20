@@ -111,19 +111,20 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // --- DATA: Projects ---
   const projects: Project[] = [ 
-    {
-      category: "Mobile Application",
-      title: "eWomen Network",
-      description: "A networking platform for women entrepreneurs and business owners. Connect, collaborate, and access success strategies from premier success coaches to achieve business growth and success.",
-      technologies: ["Native Android", "Native iOS", "Kotlin", "Swift", "Firebase", "REST APIs"],
-      features: ["Networking", "Community Building", "Success Coaching", "Event Management", "Business Resources", "Entrepreneur Support"],
-      myRole: "Mobile Application Developer - Built both Android and iOS native apps, integrated Firebase backend, implemented community features and coaching modules.",
-      ios: "https://apps.apple.com/in/app/ewomennetwork/id1625056796",
-      android: "https://play.google.com/store/apps/details?id=com.ewomennetwork",
-      status: "live",
-      isFeatured: true,
-      color: "from-pink-500 to-rose-500"
-    },
+   {
+  category: "Mobile Application",
+  title: "eWomen Network",
+  description: "A networking platform for women entrepreneurs and business owners...",
+  technologies: ["Native Android", "Native iOS", "Kotlin", "Swift", "Firebase", "REST APIs"],
+  features: ["Networking", "Community Building", "Success Coaching", "Event Management", "Business Resources", "Entrepreneur Support"],
+  myRole: "Mobile Application Developer - Built both Android and iOS native apps, integrated Firebase backend, implemented community features and coaching modules.",
+  ios: "https://apps.apple.com/in/app/ewomennetwork/id1625056796",
+  android: "https://play.google.com/store/apps/details?id=com.ewomennetwork",
+  status: "live",
+  isFeatured: true,
+  color: "from-pink-500 to-rose-500",
+  slug: "ewomen-network"  // ← ADD THIS
+},
     // Add this to your projects array
 {
   category: "Mobile Application (In Development)",
@@ -665,7 +666,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
                   {/* <button className="mt-4 text-sm text-blue-400 hover:text-blue-300" onClick={() => setSelectedProject(project)}>
                     View Details →
                   </button> */}
-                  <Link 
+                 <Link 
   href={`/projects/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}
   className="mt-4 inline-block text-sm text-blue-400 hover:text-blue-300"
 >

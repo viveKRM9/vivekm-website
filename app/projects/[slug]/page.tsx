@@ -12,7 +12,6 @@ import { FaArrowLeft, FaRocket, FaBug, FaShieldAlt, FaTrophy, FaGift, FaShareAlt
 import { MdQrCodeScanner, MdNotifications, MdSavings, MdDashboard } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 
-
 // ============================================
 // TYPE DEFINITIONS
 // ============================================
@@ -49,20 +48,6 @@ interface StoreLinks {
   ios: string | null;
 }
 
-interface Game {
-  name: string;
-  points: string;
-  status: string;
-  color: string;
-}
-
-interface Cartoon {
-  name: string;
-  pointsRequired: number;
-  progress: number;
-  status: string;
-}
-
 interface ProjectData {
   slug: string;
   title: string;
@@ -83,21 +68,18 @@ interface ProjectData {
   storeLinks: StoreLinks;
   color: string;
   version?: string;
-  games?: Game[];
-  cartoons?: Cartoon[];
 }
 
 // ============================================
 // PROJECT DATA
 // ============================================
 
-// 1. BENEfITTZ
 const benefittzData: ProjectData = {
   slug: "benefittz",
   title: "BeneFittz",
   category: "Mobile Application",
   status: "Live on Stores",
-  overview: "A comprehensive rewards and benefits platform where users can earn coins through various activities, spin to win rewards, refer friends, and redeem offers at partner shops. The app gamifies the shopping experience with leaderboards, loyalty programs, and exclusive deals.",
+  overview: "A comprehensive rewards and benefits platform where users can earn coins through various activities, spin to win rewards, refer friends, and redeem offers at partner shops.",
   screenshots: [
     { src: "/images/benefittz/home.jpeg", alt: "Home Screen with coin balance and categories" },
     { src: "/images/benefittz/spin.jpeg", alt: "Spin & Win wheel with coin rewards" },
@@ -117,7 +99,7 @@ const benefittzData: ProjectData = {
   ],
   features: [
     { icon: <FaGift className="text-2xl" />, title: "Coin System", description: "Earn coins through daily visits, spins, referrals, and purchases" },
-    { icon: <FaTrophy className="text-2xl" />, title: "Spin & Win", description: "Lucky wheel game where users spin to win coin rewards (20, 50, 100 coins)" },
+    { icon: <FaTrophy className="text-2xl" />, title: "Spin & Win", description: "Lucky wheel game where users spin to win coin rewards" },
     { icon: <FaShareAlt className="text-2xl" />, title: "Refer & Earn", description: "Unique referral codes to invite friends and earn rewards" },
     { icon: <FaStore className="text-2xl" />, title: "Hot Deals", description: "Curated list of nearby shops with special discounts and offers" },
     { icon: <MdDashboard className="text-2xl" />, title: "Shop Discovery", description: "Search and browse shops by categories with ratings and distance" },
@@ -127,55 +109,22 @@ const benefittzData: ProjectData = {
     { icon: <MdQrCodeScanner className="text-2xl" />, title: "Scan History", description: "QR code scanning history for in-store redemptions" },
   ],
   challenges: [
-    {
-      title: "Gamification Engine",
-      description: "Building a robust coin earning and reward system that keeps users engaged and motivated to use the app daily."
-    },
-    {
-      title: "Spin & Win Logic",
-      description: "Creating a fair and engaging wheel spin algorithm that balances user excitement with sustainable reward distribution."
-    },
-    {
-      title: "Referral System",
-      description: "Tracking referrals and rewarding users accurately while preventing fraud and abuse of the referral program."
-    },
-    {
-      title: "Location-Based Services",
-      description: "Finding nearby shops and deals with accurate location data and real-time updates for users on the go."
-    },
-    {
-      title: "Real-time Updates",
-      description: "Delivering live notifications for new deals and offers without draining device battery or impacting performance."
-    },
-    {
-      title: "Payment Integration",
-      description: "Integrating secure payment gateways for membership plans and premium features with seamless user experience."
-    },
+    { title: "Gamification Engine", description: "Building a robust coin earning and reward system that keeps users engaged." },
+    { title: "Spin & Win Logic", description: "Creating a fair and engaging wheel spin algorithm." },
+    { title: "Referral System", description: "Tracking referrals and rewarding users accurately while preventing fraud." },
+    { title: "Location-Based Services", description: "Finding nearby shops and deals with accurate location data." },
+    { title: "Real-time Updates", description: "Delivering live notifications for new deals and offers." },
+    { title: "Payment Integration", description: "Integrating secure payment gateways for membership plans." },
   ],
   solution: {
     title: "Comprehensive Mobile Solution",
-    description: "Built with Flutter for seamless cross-platform experience, integrated Firebase for real-time data and authentication, implemented REST APIs for business logic and payments.",
+    description: "Built with Flutter for seamless cross-platform experience, integrated Firebase for real-time data and authentication.",
     steps: [
-      {
-        title: "Cross-Platform Development",
-        description: "Used Flutter to build a single codebase that runs perfectly on both iOS and Android, saving development time and ensuring consistent user experience."
-      },
-      {
-        title: "Real-Time Data",
-        description: "Integrated Firebase Firestore for real-time data synchronization, enabling instant updates for deals, leaderboards, and user coins."
-      },
-      {
-        title: "Engaging UI/UX",
-        description: "Designed intuitive, gamified interfaces that encourage daily engagement with spin wheels, leaderboards, and referral programs."
-      },
-      {
-        title: "Location Integration",
-        description: "Implemented Google Maps API and geolocation services to find nearby shops, calculate distances, and show personalized deals."
-      },
-      {
-        title: "Secure Payments",
-        description: "Integrated Razorpay/Stripe for seamless membership purchases and premium feature upgrades with secure transaction handling."
-      },
+      { title: "Cross-Platform Development", description: "Used Flutter to build a single codebase that runs perfectly on both iOS and Android." },
+      { title: "Real-Time Data", description: "Integrated Firebase Firestore for real-time data synchronization." },
+      { title: "Engaging UI/UX", description: "Designed intuitive, gamified interfaces that encourage daily engagement." },
+      { title: "Location Integration", description: "Implemented Google Maps API and geolocation services." },
+      { title: "Secure Payments", description: "Integrated Razorpay/Stripe for seamless membership purchases." },
     ]
   },
   results: [
@@ -192,15 +141,15 @@ const benefittzData: ProjectData = {
   color: "from-amber-500 to-orange-500",
 };
 
-// 2. KIDS FUNZONE
+// KIDS FUNZONE
 const kidsFunZoneData: ProjectData = {
   slug: "kids-funzone",
   title: "Kids FunZone",
   category: "Kids Educational Application",
   status: "Available on Google Play",
   version: "1.0.0",
-  overview: "Kids FunZone is an interactive educational app designed to make learning fun for children. With 6 educational games, popular cartoons, and a reward-based unlock system, kids stay engaged while developing essential skills. Earn points by playing games and unlock favorite cartoon episodes!",
-  myRole: "Flutter Application Developer - Built the complete cross-platform educational app from scratch, implementing 6 interactive games, a points/reward system, cartoon content library with unlock mechanics, and a child-friendly user interface.",
+  overview: "Kids FunZone is an interactive educational app designed to make learning fun for children with 6 educational games and a reward-based unlock system.",
+  myRole: "Flutter Application Developer - Built the complete cross-platform educational app from scratch.",
   technologies: [
     { name: "Flutter", icon: SiFlutter, color: "#02569B" },
     { name: "Local Storage", icon: BiSupport, color: "#6B7280" },
@@ -210,79 +159,38 @@ const kidsFunZoneData: ProjectData = {
     { name: "Custom Animations", icon: BiSupport, color: "#FF6B6B" },
   ],
   features: [
-    { icon: <FaTrophy className="text-2xl" />, title: "Points System", description: "Earn points by playing games and daily visits. Track progress and unlock rewards." },
-    { icon: <FaGift className="text-2xl" />, title: "Unlock System", description: "Use points or watch ads to unlock new cartoons and videos as you progress." },
+    { icon: <FaTrophy className="text-2xl" />, title: "Points System", description: "Earn points by playing games and daily visits." },
+    { icon: <FaGift className="text-2xl" />, title: "Unlock System", description: "Use points or watch ads to unlock new cartoons." },
     { icon: <FaUserFriends className="text-2xl" />, title: "6 Educational Games", description: "Math Fun, Color Match, Animal Sounds, Balloon Pop, Shape Sorting, Memory Game." },
-    { icon: <MdDashboard className="text-2xl" />, title: "Cartoon Library", description: "Shinchan, Doraemon, Motu Patlu, Chhota Bheem, Tom & Jerry, Ninja Hattori." },
-    { icon: <MdNotifications className="text-2xl" />, title: "Progress Tracking", description: "Visual progress bars showing completion status for each cartoon." },
-    { icon: <FaShieldAlt className="text-2xl" />, title: "Safe for Kids", description: "Daily limits for healthy screen time with parent controls." },
+    { icon: <MdDashboard className="text-2xl" />, title: "Cartoon Library", description: "Shinchan, Doraemon, Motu Patlu, Chhota Bheem." },
+    { icon: <MdNotifications className="text-2xl" />, title: "Progress Tracking", description: "Visual progress bars showing completion status." },
+    { icon: <FaShieldAlt className="text-2xl" />, title: "Safe for Kids", description: "Daily limits for healthy screen time." },
   ],
-  games: [
-    { name: "Color Match", points: "3 pts per match", status: "Not played yet", color: "from-pink-500 to-rose-500" },
-    { name: "Animal Sounds", points: "2 pts per animal", status: "Not played yet", color: "from-green-500 to-emerald-500" },
-    { name: "Math Fun", points: "5 pts per correct", status: "Not played yet", color: "from-blue-500 to-indigo-500" },
-    { name: "Balloon Pop", points: "1 pt per pop", status: "Not played yet", color: "from-purple-500 to-violet-500" },
-    { name: "Shape Sorting", points: "3 pts per sort", status: "Not played yet", color: "from-orange-500 to-red-500" },
-    { name: "Memory Game", points: "2 pts per pair + 10 bonus", status: "Not played yet", color: "from-cyan-500 to-teal-500" },
-  ],
-  cartoons: [
-    { name: "Shinchan", pointsRequired: 200, progress: 100, status: "Unlocked" },
-    { name: "Doraemon", pointsRequired: 200, progress: 33, status: "In Progress" },
-    { name: "Motu Patlu", pointsRequired: 300, progress: 0, status: "Locked" },
-    { name: "Chhota Bheem", pointsRequired: 600, progress: 0, status: "Locked" },
-    { name: "Tom & Jerry", pointsRequired: 400, progress: 0, status: "Locked" },
-    { name: "Ninja Hattori", pointsRequired: 500, progress: 0, status: "Locked" },
+  screenshots: [
+    { src: "/images/kids-funzone/menu.jpeg", alt: "Menu Screen - Cartoons collection" },
+    { src: "/images/kids-funzone/games.jpeg", alt: "Games Dashboard - 6 educational games" },
+    { src: "/images/kids-funzone/animal-land.jpeg", alt: "Animal Sound Game - Land Animals" },
+    { src: "/images/kids-funzone/animal-water.jpeg", alt: "Animal Sound Game - Water Animals" },
+    { src: "/images/kids-funzone/unlock.jpeg", alt: "Cartoon Unlock - Progress bars" },
+    { src: "/images/kids-funzone/video.jpeg", alt: "Video Player - Unlock videos" },
   ],
   challenges: [
-    {
-      title: "Child-Friendly UI Design",
-      description: "Creating an interface that's colorful, intuitive, and easy for children to navigate without adult assistance."
-    },
-    {
-      title: "Game Development",
-      description: "Building 6 different educational games with unique mechanics, animations, and audio feedback to keep kids engaged."
-    },
-    {
-      title: "Gamification Engine",
-      description: "Developing a motivating points and unlock system that encourages kids to learn while having fun."
-    },
-    {
-      title: "Content Management",
-      description: "Organizing cartoon content, videos, and unlock conditions in a way that's easy to update and manage."
-    },
-    {
-      title: "Audio Integration",
-      description: "Adding animal sounds, game effects, and background music without impacting app performance."
-    },
-    {
-      title: "Screen Time Management",
-      description: "Implementing daily limits and parent controls for healthy usage patterns."
-    },
+    { title: "Child-Friendly UI Design", description: "Creating a colorful, intuitive interface for children." },
+    { title: "Game Development", description: "Building 6 different educational games with unique mechanics." },
+    { title: "Gamification Engine", description: "Developing a motivating points and unlock system." },
+    { title: "Content Management", description: "Organizing cartoon content and unlock conditions." },
+    { title: "Audio Integration", description: "Adding animal sounds and game effects." },
+    { title: "Screen Time Management", description: "Implementing daily limits and parent controls." },
   ],
   solution: {
     title: "Interactive Learning Solution",
-    description: "Built with Flutter to deliver a colorful, engaging, and educational experience that motivates children to learn through play.",
+    description: "Built with Flutter to deliver a colorful, engaging, and educational experience.",
     steps: [
-      {
-        title: "Kid-Friendly Design",
-        description: "Used bright colors, large touch targets, and simple navigation patterns designed for young children."
-      },
-      {
-        title: "6 Educational Games",
-        description: "Developed diverse games covering math, colors, animals, shapes, memory, and motor skills with different mechanics."
-      },
-      {
-        title: "Points & Unlock System",
-        description: "Created a rewarding gamification system where kids earn points and unlock favorite cartoon content."
-      },
-      {
-        title: "Offline Support",
-        description: "Implemented local storage for offline progress tracking so kids can play anywhere."
-      },
-      {
-        title: "Safe Usage",
-        description: "Added daily limits and parent controls to ensure healthy screen time habits."
-      },
+      { title: "Kid-Friendly Design", description: "Used bright colors, large touch targets, and simple navigation." },
+      { title: "6 Educational Games", description: "Developed diverse games covering math, colors, animals, and shapes." },
+      { title: "Points & Unlock System", description: "Created a rewarding gamification system." },
+      { title: "Offline Support", description: "Implemented local storage for offline progress tracking." },
+      { title: "Safe Usage", description: "Added daily limits and parent controls." },
     ]
   },
   results: [
@@ -296,26 +204,18 @@ const kidsFunZoneData: ProjectData = {
     android: "https://play.google.com/store/apps/details?id=com.kids.world",
     ios: null,
   },
-  screenshots: [
-    { src: "/images/kids-funzone/menu.jpeg", alt: "Menu Screen - Cartoons collection (Shinchan, Doraemon, Motu Patlu, Chhota Bheem, Tom & Jerry, Ninja Hattori)" },
-    { src: "/images/kids-funzone/games.jpeg", alt: "Games Dashboard - 6 educational games with points" },
-    { src: "/images/kids-funzone/animal-land.jpeg", alt: "Animal Sound Game - Land Animals (Lion, Elephant, Dog, Cat, Horse)" },
-    { src: "/images/kids-funzone/animal-water.jpeg", alt: "Animal Sound Game - Water Animals (Dolphin, Whale, Fish, Frog) with 65 points" },
-    { src: "/images/kids-funzone/unlock.jpeg", alt: "Cartoon Unlock - Progress bars for Shinchan, Doraemon, Motu Patlu, Chhota Bheem" },
-    { src: "/images/kids-funzone/video.jpeg", alt: "Video Player - Unlock videos with points or watch ads" },
-  ],
   color: "from-cyan-500 to-blue-500",
 };
 
-// 3. GREEN VISION CLEANSING
+// GREEN VISION
 const greenVisionData: ProjectData = {
   slug: "green-vision-cleansing",
   title: "Green Vision Cleansing",
   category: "Employee Time-Tracking & Workforce Management",
   status: "Live on App Store & Google Play",
   version: "2.1.50",
-  overview: "Green Vision Cleansing is a comprehensive workforce management app designed for cleaning businesses. It enables employees to clock in/out at job sites, track their work routes, view task assignments, manage payments, and communicate with managers in real-time. The app streamlines cleaning operations with location verification and automated time tracking.",
-  myRole: "iOS Application Developer - Built the complete iOS native app from scratch using Swift, implementing Core Location for GPS tracking, Firebase for real-time data sync, task management, payment processing with invoice generation, and employee communication features.",
+  overview: "A comprehensive workforce management app for cleaning businesses to manage worker shifts, locations, and attendance effectively.",
+  myRole: "iOS Application Developer - Built the complete iOS native app using Swift.",
   technologies: [
     { name: "Swift", icon: SiSwift, color: "#F05138" },
     { name: "iOS", icon: SiApple, color: "#A2AAAD" },
@@ -325,70 +225,38 @@ const greenVisionData: ProjectData = {
     { name: "REST APIs", icon: BiSupport, color: "#6B7280" },
   ],
   features: [
-    { icon: <MdDashboard className="text-2xl" />, title: "Dashboard Overview", description: "View upcoming tasks, date range filters (08 Jul - 07 Aug), and task assignments with employee names." },
-    { icon: <BiSupport className="text-2xl" />, title: "Location Tracking", description: "GPS verification for work route tracking and presence verification at job sites." },
-    { icon: <FaBug className="text-2xl" />, title: "Task Management", description: "View all tasks with status (Upcoming/Completed), dates, and employee assignments." },
-    { icon: <FaShieldAlt className="text-2xl" />, title: "Clock In/Out", description: "Accurate time tracking with location verification for attendance." },
-    { icon: <FaStore className="text-2xl" />, title: "My Cleanings", description: "Project list with manager names, locations, and last/pending payments." },
-    { icon: <MdSavings className="text-2xl" />, title: "Payment Tracking", description: "View amount paid, pending payments, and invoice generation." },
-    { icon: <MdNotifications className="text-2xl" />, title: "Announcements", description: "Company announcements and updates for employees." },
-    { icon: <FaUserFriends className="text-2xl" />, title: "Chat System", description: "In-app chat between employees and managers." },
-    { icon: <FaGift className="text-2xl" />, title: "Profile Management", description: "Edit profile, language settings, transaction history, reset password." },
+    { icon: <MdDashboard className="text-2xl" />, title: "Dashboard Overview", description: "View upcoming tasks and assignments." },
+    { icon: <BiSupport className="text-2xl" />, title: "Location Tracking", description: "GPS verification for work route tracking." },
+    { icon: <FaBug className="text-2xl" />, title: "Task Management", description: "View all tasks with status and dates." },
+    { icon: <FaShieldAlt className="text-2xl" />, title: "Clock In/Out", description: "Time tracking with location verification." },
+    { icon: <FaStore className="text-2xl" />, title: "My Cleanings", description: "Project list with payment details." },
+    { icon: <MdSavings className="text-2xl" />, title: "Payment Tracking", description: "View payments and invoice generation." },
+  ],
+  screenshots: [
+    { src: "/images/green-vision/dashboard.png", alt: "Dashboard - Upcoming tasks" },
+    { src: "/images/green-vision/location.png", alt: "Location Permission - GPS tracking" },
+    { src: "/images/green-vision/tasks.png", alt: "All Tasks - Filter tasks" },
+    { src: "/images/green-vision/cleanings.png", alt: "My Cleanings - Projects" },
+    { src: "/images/green-vision/announcements.png", alt: "Announcements" },
+    { src: "/images/green-vision/profile.png", alt: "My Profile" },
   ],
   challenges: [
-    {
-      title: "Location Tracking Accuracy",
-      description: "Implementing precise GPS tracking for work route verification and ensuring accurate clock in/out at job sites."
-    },
-    {
-      title: "Real-time Data Sync",
-      description: "Synchronizing employee clock in/out data in real-time across devices for accurate workforce management."
-    },
-    {
-      title: "Offline Capability",
-      description: "Allowing employees to clock in/out and save tasks without internet connectivity, syncing later when online."
-    },
-    {
-      title: "Battery Optimization",
-      description: "Efficient location tracking to prevent excessive battery drain while maintaining accurate GPS data."
-    },
-    {
-      title: "Payment Integration",
-      description: "Integrating payment processing with automatic invoice generation and payment status tracking."
-    },
-    {
-      title: "Role-based Access",
-      description: "Implementing different access levels for employees, managers, and admins with appropriate permissions."
-    },
+    { title: "Location Tracking Accuracy", description: "Implementing precise GPS tracking for work route verification." },
+    { title: "Real-time Data Sync", description: "Synchronizing data in real-time across devices." },
+    { title: "Offline Capability", description: "Allowing clock in/out without internet connectivity." },
+    { title: "Battery Optimization", description: "Efficient location tracking without battery drain." },
+    { title: "Payment Integration", description: "Automatic invoice generation and payment tracking." },
+    { title: "Role-based Access", description: "Different access levels for employees and managers." },
   ],
   solution: {
     title: "Comprehensive Workforce Management",
-    description: "Built with native iOS using Swift, the app delivers reliable location tracking, real-time task management, and seamless payment processing for cleaning businesses.",
+    description: "Built with native iOS using Swift for reliable location tracking and task management.",
     steps: [
-      {
-        title: "Native iOS Development",
-        description: "Built with Swift and UIKit for optimal performance and native iOS experience."
-      },
-      {
-        title: "GPS Location Tracking",
-        description: "Implemented Core Location with geofencing to verify employee presence at job sites and track work routes."
-      },
-      {
-        title: "Real-time Data Sync",
-        description: "Integrated Firebase Firestore for live synchronization of tasks, clock in/out data, and employee assignments."
-      },
-      {
-        title: "Task Management System",
-        description: "Built flexible task assignment with employee assignments, date/time tracking, and status management."
-      },
-      {
-        title: "Payment & Invoicing",
-        description: "Integrated payment processing with automatic invoice generation and payment tracking."
-      },
-      {
-        title: "Offline Support",
-        description: "Implemented local storage with CoreData for offline capability and automatic sync when back online."
-      },
+      { title: "Native iOS Development", description: "Built with Swift and UIKit for optimal performance." },
+      { title: "GPS Location Tracking", description: "Core Location with geofencing for job sites." },
+      { title: "Real-time Data Sync", description: "Firebase Firestore for live synchronization." },
+      { title: "Task Management System", description: "Flexible task assignment with status tracking." },
+      { title: "Payment & Invoicing", description: "Automatic invoice generation and payment tracking." },
     ]
   },
   results: [
@@ -396,16 +264,7 @@ const greenVisionData: ProjectData = {
     "✅ Used by cleaning businesses for workforce management",
     "✅ Accurate employee attendance and location tracking",
     "✅ Streamlined task assignment and payment processing",
-    "✅ Improved communication between managers and employees",
     "✅ Version 2.1.50 with continuous improvements",
-  ],
-  screenshots: [
-    { src: "/images/green-vision/dashboard.png", alt: "Dashboard - Upcoming tasks with date filter and employee assignments" },
-    { src: "/images/green-vision/location.png", alt: "Location Permission - GPS tracking for work route verification" },
-    { src: "/images/green-vision/tasks.png", alt: "All Tasks - Filter tasks with payment status and invoices" },
-    { src: "/images/green-vision/cleanings.png", alt: "My Cleanings - Projects with manager names and payment details" },
-    { src: "/images/green-vision/announcements.png", alt: "Announcements - Company updates and notifications" },
-    { src: "/images/green-vision/profile.png", alt: "My Profile - User settings with app version 2.1.50" },
   ],
   storeLinks: {
     android: "https://play.google.com/store/apps/details?id=com.green.greencleansing",
@@ -414,14 +273,14 @@ const greenVisionData: ProjectData = {
   color: "from-green-500 to-emerald-500",
 };
 
-// 4. GATENEST
+// GATENEST
 const gateNestData: ProjectData = {
   slug: "gatenest",
   title: "GateNest",
   category: "Apartment Guest Management System",
   status: "Available on Google Play",
-  overview: "GateNest is a smart apartment guest management system designed to streamline visitor registration and security management. Gatekeepers can register guests, generate digital visitor passes, track guest history with multiple filters (All, Pending, Accepted, Rejected, Completed), and receive real-time push notifications for guest arrivals. The app eliminates paper-based visitor logs and enhances apartment security with digital tracking.",
-  myRole: "Flutter Application Developer & Firebase Backend Engineer - Built the complete cross-platform Flutter app, designed and implemented Firebase Firestore database structure with optimized queries for guest history, integrated Firebase Storage for media and passes, implemented Firebase Cloud Messaging (FCM) for push notifications, and created role-based authentication for Owners, Gatekeepers, and Residents.",
+  overview: "A smart apartment guest management system for societies to register visitors, manage security logs, and track guest history.",
+  myRole: "Flutter Application Developer & Firebase Backend Engineer",
   technologies: [
     { name: "Flutter", icon: SiFlutter, color: "#02569B" },
     { name: "Firebase Firestore", icon: SiFirebase, color: "#FFCA28" },
@@ -431,86 +290,45 @@ const gateNestData: ProjectData = {
     { name: "QR Code", icon: BiSupport, color: "#6B7280" },
   ],
   features: [
-    { icon: <MdDashboard className="text-2xl" />, title: "Dashboard", description: "Welcome gatekeeper with recent guests and quick actions to manage visitor entries." },
-    { icon: <FaUserFriends className="text-2xl" />, title: "Guest Registration", description: "Register guests with name, phone, email, apartment number, and purpose of visit." },
-    { icon: <FaGift className="text-2xl" />, title: "Digital Visitor Pass", description: "Generate secure QR code-based digital passes for verified guests." },
-    { icon: <MdNotifications className="text-2xl" />, title: "Guest History", description: "Complete history with filters: All, Pending, Accepted, Rejected, Completed." },
-    { icon: <BiSupport className="text-2xl" />, title: "Real-time Tracking", description: "Live status updates for guest visits with push notifications." },
-    { icon: <FaShieldAlt className="text-2xl" />, title: "Secure Authentication", description: "Email/Phone login with Remember Me and Forgot Password options." },
-    { icon: <FaStore className="text-2xl" />, title: "Owner Dashboard", description: "Manage account, rate the app, view guest history, link phone numbers." },
-    { icon: <FaBug className="text-2xl" />, title: "Security Logs", description: "Complete audit trail of all guest entries and exits." },
+    { icon: <MdDashboard className="text-2xl" />, title: "Dashboard", description: "Manage guest visits and recent entries." },
+    { icon: <FaUserFriends className="text-2xl" />, title: "Guest Registration", description: "Register guests with complete details." },
+    { icon: <FaGift className="text-2xl" />, title: "Digital Visitor Pass", description: "Generate QR code-based digital passes." },
+    { icon: <MdNotifications className="text-2xl" />, title: "Guest History", description: "All/Pending/Accepted/Rejected/Completed filters." },
+    { icon: <BiSupport className="text-2xl" />, title: "Real-time Tracking", description: "Live status updates with push notifications." },
+    { icon: <FaShieldAlt className="text-2xl" />, title: "Secure Authentication", description: "Email/Phone login with role-based access." },
+  ],
+  screenshots: [
+    { src: "/images/gatenest/splash.jpeg", alt: "Splash Screen - GateNest" },
+    { src: "/images/gatenest/login.jpeg", alt: "Login Screen" },
+    { src: "/images/gatenest/dashboard.jpeg", alt: "Dashboard - Manage guests" },
+    { src: "/images/gatenest/guest-history.jpeg", alt: "Guest History filters" },
+    { src: "/images/gatenest/owner-dashboard.jpeg", alt: "Owner Dashboard" },
   ],
   challenges: [
-    {
-      title: "Database Design for Guest History",
-      description: "Designing a Firestore structure that efficiently handles guest history with multiple filters (All, Pending, Accepted, Rejected, Completed) and fast queries."
-    },
-    {
-      title: "Push Notifications Implementation",
-      description: "Setting up Firebase Cloud Messaging for real-time alerts to gatekeepers and residents when guests arrive or status changes."
-    },
-    {
-      title: "Role-based Access Control",
-      description: "Implementing secure authentication with different access levels for Owners, Gatekeepers, and Residents with appropriate permissions."
-    },
-    {
-      title: "QR Code Generation",
-      description: "Creating secure digital visitor passes with QR codes that can be scanned for verification at the gate."
-    },
-    {
-      title: "Real-time Data Sync",
-      description: "Ensuring instant synchronization of guest status across multiple devices and users in the same society."
-    },
-    {
-      title: "Offline Support",
-      description: "Allowing gatekeepers to register guests even without internet connectivity, syncing when back online."
-    },
+    { title: "Database Design for Guest History", description: "Efficient Firestore structure with multiple filters." },
+    { title: "Push Notifications Implementation", description: "FCM for real-time alerts to gatekeepers." },
+    { title: "Role-based Access Control", description: "Different levels for Owners, Gatekeepers, and Residents." },
+    { title: "QR Code Generation", description: "Secure digital visitor passes with QR codes." },
+    { title: "Real-time Data Sync", description: "Instant sync across multiple devices." },
+    { title: "Offline Support", description: "Guest registration without internet connectivity." },
   ],
   solution: {
-    title: "Comprehensive Guest Management Solution",
-    description: "Built with Flutter and Firebase, the app delivers seamless guest management with real-time notifications, secure authentication, and digital visitor tracking for apartment societies.",
+    title: "Comprehensive Guest Management",
+    description: "Built with Flutter and Firebase for seamless guest management.",
     steps: [
-      {
-        title: "Cross-platform Development",
-        description: "Built with Flutter for consistent experience on both iOS and Android devices."
-      },
-      {
-        title: "Firebase Firestore Database",
-        description: "Designed optimized Firestore collections with composite indexes for efficient guest history queries with filters."
-      },
-      {
-        title: "Push Notifications",
-        description: "Implemented Firebase Cloud Messaging for real-time notifications on guest arrivals and status changes."
-      },
-      {
-        title: "Digital Visitor Pass",
-        description: "Integrated QR code generation for secure digital visitor passes with verification system."
-      },
-      {
-        title: "Role-based Authentication",
-        description: "Firebase Auth with custom claims for Owner, Gatekeeper, and Resident roles with appropriate permissions."
-      },
-      {
-        title: "Offline Support",
-        description: "Firestore offline persistence for guest registration without internet connectivity."
-      },
+      { title: "Cross-platform Development", description: "Flutter for consistent iOS and Android experience." },
+      { title: "Firebase Firestore", description: "Optimized collections with composite indexes." },
+      { title: "Push Notifications", description: "FCM for real-time guest arrival alerts." },
+      { title: "Digital Visitor Pass", description: "QR code generation for secure passes." },
+      { title: "Role-based Authentication", description: "Custom claims for different roles." },
     ]
   },
   results: [
     "✅ Available on Google Play",
-    "✅ Digital guest management for apartment societies",
-    "✅ Real-time notifications for gatekeepers and residents",
-    "✅ Secure visitor verification with digital passes",
+    "✅ Digital guest management for societies",
+    "✅ Real-time notifications for gatekeepers",
     "✅ Complete guest history with audit trail",
     "✅ Eliminated paper-based visitor logs",
-    "✅ Enhanced security with digital tracking",
-  ],
-  screenshots: [
-    { src: "/images/gatenest/splash.jpeg", alt: "Splash Screen - GateNest Apartment Guest Management System" },
-    { src: "/images/gatenest/login.jpeg", alt: "Login Screen - Welcome Back! Sign in with Email/Phone" },
-    { src: "/images/gatenest/dashboard.jpeg", alt: "Dashboard - Manage guest visits with recent guests" },
-    { src: "/images/gatenest/guest-history.jpeg", alt: "Guest History - All/Pending/Accepted/Rejected/Completed filters" },
-    { src: "/images/gatenest/owner-dashboard.jpeg", alt: "Owner Dashboard - Menu with guest history and account management" },
   ],
   storeLinks: {
     android: "https://play.google.com/store/apps/details?id=com.gate.nest",
@@ -519,14 +337,14 @@ const gateNestData: ProjectData = {
   color: "from-purple-500 to-violet-500",
 };
 
-// 5. SITTERBOSS
+// SITTERBOSS
 const sitterBossData: ProjectData = {
   slug: "sitterboss",
   title: "SitterBoss",
   category: "Babysitter Booking Platform",
   status: "In Development (TestFlight Available)",
-  overview: "SitterBoss is a comprehensive babysitter booking platform connecting parents with trusted babysitters. Sitters can manage their profiles, receive job requests, update their availability, and track their earnings. Parents can post jobs, review applicants, and book trusted sitters. The app provides a streamlined way for babysitters to manage their bookings and communicate with parents.",
-  myRole: "React Native Application Developer - Built the complete cross-platform mobile app using React Native, implementing real-time booking system, job posting, availability management, payment processing with Stripe, video call integration with WebRTC, and role-based access for sitters and parents.",
+  overview: "A babysitter booking platform connecting parents with trusted babysitters. Sitters manage profiles, receive job requests, and track earnings.",
+  myRole: "React Native Application Developer - Built the cross-platform app with real-time booking and video calls.",
   technologies: [
     { name: "React Native", icon: SiReact, color: "#61DAFB" },
     { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
@@ -537,71 +355,40 @@ const sitterBossData: ProjectData = {
     { name: "Android", icon: SiAndroid, color: "#3DDC84" },
   ],
   features: [
-    { icon: <MdDashboard className="text-2xl" />, title: "Dashboard", description: "Hello greeting, schedule view (Thu-Tue), availability status, and quick actions." },
-    { icon: <FaUserFriends className="text-2xl" />, title: "Schedule Management", description: "Weekly calendar with availability settings and Blitz Visibility mode for urgent jobs." },
-    { icon: <BiSupport className="text-2xl" />, title: "Booking System", description: "All/Pending/Completed filters with detailed booking information and actions." },
-    { icon: <FaStore className="text-2xl" />, title: "Job Posting", description: "Browse and accept posted sitter jobs with Accept/Pro buttons." },
-    { icon: <MdSavings className="text-2xl" />, title: "Earnings Tracking", description: "Track earnings per booking ($23, $403) with transaction history." },
-    { icon: <FaGift className="text-2xl" />, title: "Ratings & Reviews", description: "Rate sitters and view ratings (⭐⭐⭐⭐⭐ 2/5) for trust and quality." },
-    { icon: <MdNotifications className="text-2xl" />, title: "Notifications", description: "Real-time alerts for new jobs, booking updates, and messages (18 notifications)." },
-    { icon: <FaBug className="text-2xl" />, title: "Video Calls", description: "Integrated video call functionality for interviews and check-ins." },
-    { icon: <FaShieldAlt className="text-2xl" />, title: "Role Management", description: "Switch between Sitter and Parent roles with different permissions." },
-    { icon: <FaRocket className="text-2xl" />, title: "Account Management", description: "Profile settings, notification center, transaction history, FAQs, and help." },
+    { icon: <MdDashboard className="text-2xl" />, title: "Dashboard", description: "Schedule view and availability status." },
+    { icon: <FaUserFriends className="text-2xl" />, title: "Schedule Management", description: "Weekly calendar with Blitz Visibility mode." },
+    { icon: <BiSupport className="text-2xl" />, title: "Booking System", description: "All/Pending/Completed filters." },
+    { icon: <FaStore className="text-2xl" />, title: "Job Posting", description: "Browse and accept sitter jobs." },
+    { icon: <MdSavings className="text-2xl" />, title: "Earnings Tracking", description: "Track earnings per booking." },
+    { icon: <FaGift className="text-2xl" />, title: "Ratings & Reviews", description: "Rate sitters and view ratings." },
+    { icon: <MdNotifications className="text-2xl" />, title: "Notifications", description: "Real-time alerts for jobs and updates." },
+    { icon: <FaBug className="text-2xl" />, title: "Video Calls", description: "Integrated video call functionality." },
+    { icon: <FaShieldAlt className="text-2xl" />, title: "Role Management", description: "Switch between Sitter and Parent roles." },
+  ],
+  screenshots: [
+    { src: "/images/sitterboss/home.jpeg", alt: "Home Dashboard" },
+    { src: "/images/sitterboss/bookings.jpeg", alt: "Bookings" },
+    { src: "/images/sitterboss/jobs.jpeg", alt: "Posted Jobs" },
+    { src: "/images/sitterboss/chat.jpeg", alt: "Chat Screen" },
+    { src: "/images/sitterboss/account.jpeg", alt: "Account" },
   ],
   challenges: [
-    {
-      title: "Real-time Booking System",
-      description: "Implementing instant job posting and acceptance with live updates for both sitters and parents."
-    },
-    {
-      title: "Availability Management",
-      description: "Building a flexible availability calendar with Blitz Visibility mode for urgent job alerts."
-    },
-    {
-      title: "Payment Processing",
-      description: "Integrating secure payment system with escrow protection for babysitting services."
-    },
-    {
-      title: "Role Switching",
-      description: "Allowing users to seamlessly switch between sitter and parent roles with different permissions."
-    },
-    {
-      title: "Video Calls",
-      description: "Implementing in-app video calls for interviews and check-ins with WebRTC integration."
-    },
-    {
-      title: "Location Tracking",
-      description: "GPS integration for job location display and proximity-based job suggestions."
-    },
+    { title: "Real-time Booking System", description: "Instant job posting and acceptance with live updates." },
+    { title: "Availability Management", description: "Flexible availability calendar with Blitz Visibility." },
+    { title: "Payment Processing", description: "Secure payment system with escrow protection." },
+    { title: "Role Switching", description: "Seamless switch between sitter and parent roles." },
+    { title: "Video Calls", description: "In-app video calls with WebRTC integration." },
+    { title: "Location Tracking", description: "GPS integration for job location display." },
   ],
   solution: {
-    title: "Comprehensive Babysitter Booking Platform",
-    description: "Built with React Native for cross-platform compatibility, the app delivers real-time booking, secure payments, and seamless communication between parents and sitters.",
+    title: "Comprehensive Booking Platform",
+    description: "Built with React Native for cross-platform compatibility.",
     steps: [
-      {
-        title: "Cross-platform Development",
-        description: "Built with React Native for consistent experience on both iOS and Android devices."
-      },
-      {
-        title: "Real-time Booking",
-        description: "Implemented Firebase Firestore with real-time listeners for instant job updates and booking confirmations."
-      },
-      {
-        title: "Payment Processing",
-        description: "Integrated Stripe Connect for secure escrow payments between parents and sitters."
-      },
-      {
-        title: "Video Calls",
-        description: "Implemented WebRTC with Video SDK for in-app video calls and check-ins."
-      },
-      {
-        title: "Role-based Access",
-        description: "Created different views and permissions for Sitter and Parent roles."
-      },
-      {
-        title: "Push Notifications",
-        description: "Firebase Cloud Messaging for real-time alerts on new jobs and booking updates."
-      },
+      { title: "Cross-platform Development", description: "React Native for iOS and Android." },
+      { title: "Real-time Booking", description: "Firebase Firestore for instant updates." },
+      { title: "Payment Processing", description: "Stripe Connect for escrow payments." },
+      { title: "Video Calls", description: "WebRTC with Video SDK." },
+      { title: "Push Notifications", description: "FCM for real-time alerts." },
     ]
   },
   results: [
@@ -610,15 +397,7 @@ const sitterBossData: ProjectData = {
     "✅ Real-time booking and job posting",
     "✅ Secure payment processing with escrow",
     "✅ Role-based access for sitters and parents",
-    "✅ Rating and review system",
     "🔜 Ready for production release",
-  ],
-  screenshots: [
-    { src: "/images/sitterboss/home.jpeg", alt: "Home Dashboard - Hello Gens greeting, schedule view, availability status" },
-    { src: "/images/sitterboss/bookings.jpeg", alt: "Bookings - All/Pending/Completed filters with booking details" },
-    { src: "/images/sitterboss/jobs.jpeg", alt: "Posted Jobs - Sitter jobs with Accept/Pro buttons and job details" },
-    { src: "/images/sitterboss/chat.jpeg", alt: "Chat Screen - Real-time messaging between sitter and parent with options for text messages, photo sharing, and video call initiation" },
-    { src: "/images/sitterboss/account.jpeg", alt: "Account - Settings, notification center, transaction history, role management" },
   ],
   storeLinks: {
     android: null,
@@ -627,14 +406,14 @@ const sitterBossData: ProjectData = {
   color: "from-blue-500 to-indigo-500",
 };
 
-// 6. E WOMEN NETWORK
+// E WOMEN
 const eWomenData: ProjectData = {
-  slug: "ewomen",
+  slug: "ewomen-network",
   title: "eWomen Network",
   category: "Mobile Application",
   status: "Live on Stores",
-  overview: "A networking platform for women entrepreneurs and business owners. Connect, collaborate, and access success strategies from premier success coaches to achieve business growth and success.",
-  myRole: "Mobile Application Developer - Built both Android and iOS native apps, integrated Firebase backend, implemented community features and coaching modules.",
+  overview: "A networking platform for women entrepreneurs to connect, collaborate, and access success strategies from premier success coaches.",
+  myRole: "Mobile Application Developer - Built both Android and iOS native apps.",
   technologies: [
     { name: "Native Android", icon: SiAndroid, color: "#3DDC84" },
     { name: "Native iOS", icon: SiApple, color: "#A2AAAD" },
@@ -644,69 +423,40 @@ const eWomenData: ProjectData = {
     { name: "REST APIs", icon: BiSupport, color: "#6B7280" },
   ],
   features: [
-    { icon: <FaUserFriends className="text-2xl" />, title: "Networking", description: "Connect and collaborate with women entrepreneurs" },
-    { icon: <FaGift className="text-2xl" />, title: "Community Building", description: "Create and join interest-based groups" },
-    { icon: <FaTrophy className="text-2xl" />, title: "Success Coaching", description: "Access to premier success coaches and strategies" },
-    { icon: <MdDashboard className="text-2xl" />, title: "Event Management", description: "Discover and register for networking events" },
-    { icon: <MdSavings className="text-2xl" />, title: "Business Resources", description: "Curated resources for business growth" },
-    { icon: <FaShieldAlt className="text-2xl" />, title: "Entrepreneur Support", description: "Mentorship and peer support system" },
+    { icon: <FaUserFriends className="text-2xl" />, title: "Networking", description: "Connect with women entrepreneurs." },
+    { icon: <FaGift className="text-2xl" />, title: "Community Building", description: "Create interest-based groups." },
+    { icon: <FaTrophy className="text-2xl" />, title: "Success Coaching", description: "Access to premier success coaches." },
+    { icon: <MdDashboard className="text-2xl" />, title: "Event Management", description: "Discover and register for events." },
+    { icon: <MdSavings className="text-2xl" />, title: "Business Resources", description: "Curated resources for growth." },
+    { icon: <FaShieldAlt className="text-2xl" />, title: "Entrepreneur Support", description: "Mentorship and peer support." },
+  ],
+  screenshots: [
+    { src: "/images/ewomen/home.jpeg", alt: "Home Screen" },
+    { src: "/images/ewomen/network.jpeg", alt: "Networking" },
+    { src: "/images/ewomen/coaching.jpeg", alt: "Coaching" },
+    { src: "/images/ewomen/events.jpeg", alt: "Events" },
+    { src: "/images/ewomen/profile.jpeg", alt: "Profile" },
   ],
   challenges: [
-    {
-      title: "Building two separate native apps",
-      description: "Had to maintain codebases for both Android and iOS with consistent features."
-    },
-    {
-      title: "Real-time community features",
-      description: "Implementing seamless networking and communication between entrepreneurs."
-    },
-    {
-      title: "Content management",
-      description: "Handling dynamic coaching content and resources for users."
-    },
-    {
-      title: "User engagement",
-      description: "Building features that keep entrepreneurs active and connected."
-    },
+    { title: "Two Separate Native Apps", description: "Maintaining codebases for Android and iOS." },
+    { title: "Real-time Community Features", description: "Seamless networking and communication." },
+    { title: "Content Management", description: "Dynamic coaching content and resources." },
+    { title: "User Engagement", description: "Features that keep entrepreneurs active." },
   ],
   solution: {
     title: "Native Mobile Solution",
-    description: "Built native apps for Android and iOS with shared Firebase backend, implementing real-time community features and coaching content.",
+    description: "Built native apps with shared Firebase backend.",
     steps: [
-      {
-        title: "Native Android Development",
-        description: "Built with Kotlin using MVVM architecture for robust Android experience."
-      },
-      {
-        title: "Native iOS Development",
-        description: "Built with Swift and UIKit for seamless iOS experience."
-      },
-      {
-        title: "Firebase Backend",
-        description: "Firebase for authentication, data storage, and push notifications."
-      },
-      {
-        title: "Community Features",
-        description: "Real-time networking, group creation, and event management."
-      },
-      {
-        title: "Coaching Content",
-        description: "Dynamic content management with Cloud Functions."
-      },
+      { title: "Native Android", description: "Kotlin with MVVM architecture." },
+      { title: "Native iOS", description: "Swift with UIKit." },
+      { title: "Firebase Backend", description: "Authentication, data storage, and push notifications." },
+      { title: "Community Features", description: "Real-time networking and event management." },
     ]
   },
   results: [
     "✅ Live on both Google Play and App Store",
     "✅ Enables women entrepreneurs to connect globally",
     "✅ Accessible coaching resources for business growth",
-  ],
-  screenshots: [
-    { src: "/images/ewomen/home.jpeg", alt: "Home Screen" },
-    { src: "/images/ewomen/network.jpeg", alt: "Networking Screen" },
-    { src: "/images/ewomen/coaching.jpeg", alt: "Coaching Module" },
-    { src: "/images/ewomen/events.jpeg", alt: "Events" },
-    { src: "/images/ewomen/profile.jpeg", alt: "Profile" },
-    { src: "/images/ewomen/resources.jpeg", alt: "Business Resources" },
   ],
   storeLinks: {
     android: "https://play.google.com/store/apps/details?id=com.ewomennetwork",
@@ -724,8 +474,22 @@ const projectDataMap: Record<string, ProjectData> = {
   "green-vision-cleansing": greenVisionData,
   "gatenest": gateNestData,
   "sitterboss": sitterBossData,
-  "ewomen": eWomenData,
+  "ewomen-network": eWomenData, 
 };
+
+// ============================================
+// GENERATE STATIC PATHS
+// ============================================
+export function generateStaticParams() {
+  return [
+    { slug: "benefittz" },
+    { slug: "kids-funzone" },
+    { slug: "green-vision-cleansing" },
+    { slug: "gatenest" },
+    { slug: "sitterboss" },
+    { slug: "ewomen-network" },
+  ];
+}
 
 // ============================================
 // PAGE COMPONENT
@@ -741,10 +505,8 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Get the project data based on the slug
   const project = projectDataMap[params.slug];
 
-  // If project not found, show 404
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
