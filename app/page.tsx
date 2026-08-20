@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link"; 
+import { Analytics } from "@vercel/analytics/next"
 import { 
   SiNextdotjs, SiReact, SiFlutter, SiNodedotjs, SiAndroid, 
   SiFirebase, SiMongodb, SiMysql, SiVercel, SiFigma, SiStripe, SiTailwindcss, 
