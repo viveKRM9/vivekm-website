@@ -246,6 +246,30 @@ export default function Home() {
       android: "https://play.google.com/store/apps/details?id=com.green.greencleansing"
     },
     {
+    category: "Mobile Application",
+    title: "eWomen Network",
+    description: "A networking platform for women entrepreneurs and business owners. Connect, collaborate, and access success strategies from premier success coaches to achieve business growth and success.",
+    technologies: ["Native Android", "Native iOS", "Kotlin", "Swift", "Firebase", "REST APIs"],
+    features: ["Networking", "Community Building", "Success Coaching", "Event Management", "Business Resources", "Entrepreneur Support"],
+    metrics: ["Live on Stores", "Women Entrepreneurs", "Networking"],
+    ios: "https://apps.apple.com/in/app/ewomennetwork/id1625056796",
+    android: "https://play.google.com/store/apps/details?id=com.ewomennetwork",
+    status: "live",
+    isFeatured: true
+  },
+  {
+    category: "Mobile Application (In Development)",
+    title: "SitterBoss",
+    description: "A comprehensive babysitter booking platform connecting parents with trusted babysitters. Sitters can manage profiles, receive job requests, update availability, and track earnings seamlessly.",
+    technologies: ["React Native", "Firebase", "REST APIs", "iOS", "Android"],
+    features: ["Profile Management", "Job Requests", "Availability Management", "Earnings Tracking", "Booking System", "Parent-Sitter Communication"],
+    metrics: ["In Development", "TestFlight Available"],
+    ios: "https://testflight.apple.com/join/RTFHr3e8",
+    android: null,
+    status: "development",
+    isFeatured: true
+  },
+    {
       category: "Smart Management (In Dev)",
       title: "GateNest",
       description: "A smart apartment guest management system allowing societies to digitally register visitors, manage security logs, and ensure safety.",
