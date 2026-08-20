@@ -457,7 +457,7 @@ export default function Home() {
               </div>
               <div className="absolute -right-5 -top-5 rounded-2xl border border-zinc-200 bg-white px-6 py-4 shadow-xl">
                 <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Trusted by</div>
-                <div className="mt-1 font-bold text-zinc-900">100+ Clients</div>
+                <div className="mt-1 font-bold text-zinc-900">10+ Clients</div>
               </div>
             </div>
           </div>
