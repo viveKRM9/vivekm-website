@@ -114,7 +114,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
    {
   category: "Mobile Application",
   title: "eWomen Network",
-  description: "A networking platform for women entrepreneurs and business owners...",
+  description: "A networking platform for women entrepreneurs and business owners. Connect, collaborate, and access success strategies from premier success coaches to achieve business growth and success.",
   technologies: ["Native Android", "Native iOS", "Kotlin", "Swift", "Firebase", "REST APIs"],
   features: ["Networking", "Community Building", "Success Coaching", "Event Management", "Business Resources", "Entrepreneur Support"],
   myRole: "Mobile Application Developer - Built both Android and iOS native apps, integrated Firebase backend, implemented community features and coaching modules.",
