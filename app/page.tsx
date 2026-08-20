@@ -24,6 +24,7 @@ interface Project {
   status: "live" | "development";
   isFeatured: boolean;
   color: string;
+  slug?: string; // Optional slug for linking
 }
 
 export default function Home() {
@@ -123,71 +124,114 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
       isFeatured: true,
       color: "from-pink-500 to-rose-500"
     },
-    {
-      category: "Mobile Application (In Development)",
-      title: "SitterBoss",
-      description: "A comprehensive babysitter booking platform connecting parents with trusted babysitters. Sitters can manage profiles, receive job requests, update availability, and track earnings seamlessly.",
-      technologies: ["React Native", "Firebase", "REST APIs", "iOS", "Android"],
-      features: ["Profile Management", "Job Requests", "Availability Management", "Earnings Tracking", "Booking System", "Parent-Sitter Communication"],
-      myRole: "Mobile Application Developer - Building cross-platform React Native app, implementing real-time booking system, Firebase integration, and payment tracking.",
-      ios: "https://testflight.apple.com/join/RTFHr3e8",
-      android: null,
-      status: "development",
-      isFeatured: true,
-      color: "from-blue-500 to-indigo-500"
-    },
-    {
-      category: "Mobile Application",
-      title: "BeneFittz",
-      description: "A complete rewards and benefits platform for shoppers. Earn, track, and redeem points seamlessly at partner shops.",
-      technologies: ["Flutter", "REST API", "Firebase", "Android", "iOS"],
-      features: ["Authentication", "API Integration", "Rewards/Points", "UI/UX Design", "App Deployment", "Bug Fixing"],
-      myRole: "Mobile Application Developer - Built cross-platform Flutter app, integrated reward system API, handled store submissions and maintenance.",
-      ios: "https://apps.apple.com/in/app/benefittz/id6746153320",
-      android: "https://play.google.com/store/apps/details?id=com.benefitt.app",
-      status: "live",
-      isFeatured: false,
-      color: "from-amber-500 to-orange-500"
-    },
+    // Add this to your projects array
+{
+  category: "Mobile Application (In Development)",
+  title: "SitterBoss",
+  description: "A comprehensive babysitter booking platform connecting parents with trusted babysitters. Sitters can manage profiles, receive job requests, update availability, and track earnings seamlessly.",
+  technologies: ["React Native", "Firebase", "REST APIs", "WebRTC", "Stripe"],
+  features: [
+    "Real-time Booking System",
+    "Job Posting & Acceptance",
+    "Availability Management",
+    "Earnings Tracking",
+    "Video Calls using Twillio and Agora",
+    "Rating & Reviews",
+    "Role Switching (Sitter/Parent)",
+    "Push Notifications"
+  ],
+  myRole: "React Native Application Developer - Built the complete cross-platform app with real-time booking system, job posting, availability management, payment processing, and video call integration.",
+  ios: "https://testflight.apple.com/join/RTFHr3e8",
+  android: null,
+  status: "development",
+  isFeatured: true,
+  color: "from-blue-500 to-indigo-500",
+  slug: "sitterboss"
+},
     {
       category: "Mobile Application",
-      title: "Green Vision Cleansing",
-      description: "An employee time-tracking app designed for cleaning businesses to manage worker shifts, locations, and attendance effectively.",
-      technologies: ["Flutter", "Google Maps", "Firebase", "Location Services", "Android", "iOS"],
-      features: ["Employee Management", "Clock-in/out", "Location Tracking", "Shift Management", "Attendance", "Task Management", "Notifications"],
-      myRole: "Mobile Application Developer - Built Flutter app, implemented Google Maps integration for location tracking, built shift management and attendance features.",
-      ios: "https://apps.apple.com/in/app/green-vision-cleansing2-0/id6479843416",
-      android: "https://play.google.com/store/apps/details?id=com.green.greencleansing",
-      status: "live",
-      isFeatured: false,
-      color: "from-green-500 to-emerald-500"
+    title: "BeneFittz",
+    description: "A complete rewards and benefits platform where users earn coins through spins, referrals, and purchases. Redeem rewards at partner shops with gamified engagement.",
+    technologies: ["Flutter", "Firebase", "REST APIs", "Google Maps", "QR Scanner"],
+    features: ["Spin & Win", "Refer & Earn", "Leaderboard", "Hot Deals", "Shop Discovery", "Coin System", "Membership Plans", "Notifications", "Savings Tracker"],
+    myRole: "Flutter Application Developer - Built the complete cross-platform app with gamification features, spin wheel, referral system, shop discovery, and real-time notifications.",
+    ios: "https://apps.apple.com/in/app/benefittz/id6746153320",
+    android: "https://play.google.com/store/apps/details?id=com.benefitt.app",
+    status: "live",
+    isFeatured: false,
+    color: "from-amber-500 to-orange-500",
+    slug: "benefittz" // Add slug for linking
     },
-    {
-      category: "Smart Management (In Dev)",
-      title: "GateNest",
-      description: "A smart apartment guest management system allowing societies to digitally register visitors, manage security logs, and ensure safety.",
-      technologies: ["Flutter", "Firebase", "Android"],
-      features: ["Guest Registration", "Security Logs", "Visitor Management"],
-      myRole: "Mobile Application Developer - Built Flutter app with Firebase backend for guest management and security logging.",
-      ios: null,
-      android: "https://play.google.com/store/apps/details?id=com.gate.nest",
-      status: "development",
-      isFeatured: false,
-      color: "from-purple-500 to-violet-500"
-    },
-    {
-      category: "Kids Application (In Dev)",
-      title: "Kids FunZone",
-      description: "An interactive and educational mobile app designed for children to learn through fun games, puzzles, and engaging activities.",
-      technologies: ["Flutter", "Animation", "Android"],
-      features: ["Interactive UI", "Educational Content", "Games", "Puzzles"],
-      myRole: "Mobile Application Developer - Built Flutter app with custom animations and interactive educational content.",
-      ios: null,
-      android: "https://play.google.com/store/apps/details?id=com.kids.world",
-      status: "development",
-      isFeatured: false,
-      color: "from-cyan-500 to-blue-500"
-    },
+    // Add this to your projects array
+{
+  category: "Mobile Application",
+  title: "Green Vision Cleansing",
+  description: "An employee time-tracking and workforce management app for cleaning businesses to manage worker shifts, locations, and attendance effectively.",
+  technologies: ["Swift", "iOS", "Core Location", "Firebase", "REST APIs", "MapKit"],
+  features: [
+    "Location Tracking & GPS Verification",
+    "Clock In/Out with Time Tracking",
+    "Task Management & Assignment",
+    "Real-time Employee Sync",
+    "Payment Processing & Invoices",
+    "Chat System",
+    "Announcements & Updates",
+    "Profile Management"
+  ],
+  myRole: "iOS Application Developer - Built the complete iOS native app with Swift, implementing location tracking, task management, payment processing, and real-time workforce management features.",
+  ios: "https://apps.apple.com/in/app/green-vision-cleansing2-0/id6479843416",
+  android: "https://play.google.com/store/apps/details?id=com.green.greencleansing",
+  status: "live",
+  isFeatured: false,
+  color: "from-green-500 to-emerald-500",
+  slug: "green-vision-cleansing"
+},
+    // Add this to your projects array
+{
+  category: "Smart Management Application",
+  title: "GateNest",
+  description: "A smart apartment guest management system allowing societies to digitally register visitors, manage security logs, track guest history, and ensure resident safety with real-time notifications.",
+  technologies: ["Flutter", "Firebase Firestore", "Firebase Storage", "FCM", "Firebase Auth", "QR Code"],
+  features: [
+    "Guest Registration & Management",
+    "Digital Visitor Pass (QR Code)",
+    "Guest History (All/Pending/Accepted/Rejected/Completed)",
+    "Real-time Push Notifications",
+    "Role-based Authentication (Owner/Gatekeeper/Resident)",
+    "Phone Number Linking",
+    "Secure & Verified Entry",
+    "Audit Trail & Security Logs"
+  ],
+  myRole: "Flutter Application Developer & Firebase Backend Engineer - Built the complete Flutter app, designed Firebase Firestore database, integrated Firebase Storage, and implemented push notifications with Firebase Cloud Messaging.",
+  ios: null,
+  android: "https://play.google.com/store/apps/details?id=com.gate.nest",
+  status: "development",
+  isFeatured: false,
+  color: "from-purple-500 to-violet-500",
+  slug: "gatenest"
+},
+  
+{
+  category: "Kids Application",
+  title: "Kids FunZone",
+  description: "An interactive and educational mobile app for children to learn through fun games, puzzles, and engaging activities. Earn points, unlock cartoons, and progress through levels.",
+  technologies: ["Flutter", "Local Storage", "Animations", "Audio", "Video Player", "AdMob"],
+  features: [
+    "Educational Games (Math, Colors, Animals, Puzzles)",
+    "Points & Unlock System",
+    "Cartoon Library (Shinchan, Doraemon, Motu Patlu, Chhota Bheem)",
+    "Progress Tracking",
+    "Rewarded Ads",
+    "Daily Limits for Safe Screen Time"
+  ],
+  myRole: "Flutter Application Developer - Built the complete app with 6 educational games, points system, unlockable content, and kid-friendly UI.",
+  ios: null,
+  android: "https://play.google.com/store/apps/details?id=com.kids.world",
+  status: "development",
+  isFeatured: false,
+  color: "from-cyan-500 to-blue-500",
+  slug: "kids-funzone"
+},
   ];
 
   // --- DATA: Services ---
@@ -618,9 +662,15 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
                       </a>
                     )}
                   </div>
-                  <button className="mt-4 text-sm text-blue-400 hover:text-blue-300" onClick={() => setSelectedProject(project)}>
+                  {/* <button className="mt-4 text-sm text-blue-400 hover:text-blue-300" onClick={() => setSelectedProject(project)}>
                     View Details →
-                  </button>
+                  </button> */}
+                  <Link 
+  href={`/projects/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}
+  className="mt-4 inline-block text-sm text-blue-400 hover:text-blue-300"
+>
+  View Case Study →
+</Link>
                 </div>
               </div>
             ))}
@@ -767,8 +817,7 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
               <div className="text-3xl mb-4">📱</div>
               <h3 className="text-xl font-bold">What I Do</h3>
               <p className="mt-3 text-zinc-600 leading-7">
-                I help startups, businesses and development teams build new mobile applications, 
-                fix existing apps, integrate APIs, and maintain applications already in production.
+               I help startups, businesses, and development teams build production-ready mobile applications for iOS and Android. I specialize in Flutter, native iOS and Android development, REST API integration, Firebase, authentication, Google Maps, location services, notifications, and third-party integrations. I can take an app from development to App Store and Play Store release, or help improve and maintain an existing application.
               </p>
             </div>
             <div className="rounded-2xl bg-zinc-50 p-8 border border-zinc-100">
