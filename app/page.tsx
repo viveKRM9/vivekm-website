@@ -801,57 +801,195 @@ const [selectedProject, setSelectedProject] = useState<Project | null>(null);
         </div>
       )}
 
-      {/* ABOUT */}
-      <section id="about" className="py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 bg-white">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">About Me</p>
-            <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-              Hi, I&apos;m <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Vivek</span>
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
-              I&apos;m a mobile application developer specializing in Flutter, iOS and Android development.
-            </p>
-          </div>
+     {/* ABOUT - With Experience & Education */}
+<section id="about" className="py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 bg-white">
+  <div className="mx-auto max-w-6xl px-6 lg:px-8">
+    <div className="text-center">
+      <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">About Me</p>
+      <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+        Hi, I&apos;m <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Vivek</span>
+      </h2>
+      <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
+        Mobile application developer with 6.5+ years of expertise in building scalable iOS and cross-platform 
+        solutions using Swift, Dart, and Flutter. Experienced in designing and delivering production-ready 
+        applications across the full mobile development lifecycle.
+      </p>
+    </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
-            <div className="rounded-2xl bg-zinc-50 p-8 border border-zinc-100">
-              <div className="text-3xl mb-4">📱</div>
-              <h3 className="text-xl font-bold">What I Do</h3>
-              <p className="mt-3 text-zinc-600 leading-7">
-               I help startups, businesses, and development teams build production-ready mobile applications for iOS and Android. I specialize in Flutter, native iOS and Android development, REST API integration, Firebase, authentication, Google Maps, location services, notifications, and third-party integrations. I can take an app from development to App Store and Play Store release, or help improve and maintain an existing application.
-              </p>
+    {/* Experience */}
+    <div className="mt-16">
+      <h3 className="text-2xl font-bold text-zinc-800 mb-8 flex items-center gap-3">
+        <span className="text-3xl">💼</span> Work Experience
+      </h3>
+      <div className="space-y-8">
+        {/* Experience 1 */}
+        <div className="rounded-2xl bg-zinc-50 p-8 border border-zinc-100 transition-all hover:shadow-md">
+          <div className="flex flex-wrap justify-between items-start gap-4">
+            <div>
+              <h4 className="text-xl font-bold text-zinc-800">iOS & Flutter Developer</h4>
+              <p className="text-blue-600 font-semibold">Bizhawkz IT Solutions Pvt. Ltd.</p>
             </div>
-            <div className="rounded-2xl bg-zinc-50 p-8 border border-zinc-100">
-              <div className="text-3xl mb-4">🔧</div>
-              <h3 className="text-xl font-bold">What I Fix</h3>
-              <p className="mt-3 text-zinc-600 leading-7">
-                Flutter build errors, Android Gradle issues, Xcode problems, CocoaPods conflicts, 
-                API integration, Firebase issues, Google Maps, WebView, crashes, and more.
-              </p>
-            </div>
+            <span className="rounded-full bg-blue-100 px-4 py-1.5 text-sm font-medium text-blue-700">
+              02/2022 - Present
+            </span>
           </div>
-
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
-            {skills.map((skill) => (
-              <span key={skill} className="rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 border border-zinc-200">
-                {skill}
-              </span>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <a 
-              href="https://api.whatsapp.com/send?phone=919693427671&text=Hi%20Vivek%2C%20I%20found%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20a%20project." 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3.5 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
-            >
-              Let&apos;s Build Something Together →
-            </a>
-          </div>
+          <ul className="mt-4 space-y-2 text-zinc-600 text-sm leading-7 list-disc list-inside">
+            <li>Collaborated with cross-functional teams to define product requirements and deliver high-quality iOS features.</li>
+            <li>Designed, developed, and maintained scalable Swift-based applications using UIKit, Xcode, and MVC architecture.</li>
+            <li>Built modular and reusable components using protocol-delegate patterns and Notification Center.</li>
+            <li>Integrated RESTful APIs, JSON parsing/decoding, and third-party SDKs to enhance functionality.</li>
+            <li>Improved application performance through debugging, profiling, and multithreading.</li>
+            <li>Conducted code reviews and enforced clean architecture principles for maintainability.</li>
+          </ul>
         </div>
-      </section>
+
+        {/* Experience 2 */}
+        <div className="rounded-2xl bg-zinc-50 p-8 border border-zinc-100 transition-all hover:shadow-md">
+          <div className="flex flex-wrap justify-between items-start gap-4">
+            <div>
+              <h4 className="text-xl font-bold text-zinc-800">iOS & Unity Developer</h4>
+              <p className="text-blue-600 font-semibold">Ettelligens Technologies Pvt. Ltd.</p>
+            </div>
+            <span className="rounded-full bg-blue-100 px-4 py-1.5 text-sm font-medium text-blue-700">
+              10/2020 - 01/2022
+            </span>
+          </div>
+          <ul className="mt-4 space-y-2 text-zinc-600 text-sm leading-7 list-disc list-inside">
+            <li>Developed immersive 2D and 3D game experiences using Unity engine and C#.</li>
+            <li>Designed game architecture including scene management, physics systems, and animation pipelines.</li>
+            <li>Built interactive UI systems with scoring, timers, and gameplay controls.</li>
+            <li>Optimized game performance through memory management and physics tuning.</li>
+            <li>Integrated assets, terrain systems, and environmental elements for dynamic gameplay.</li>
+          </ul>
+        </div>
+
+        {/* Experience 3 */}
+        <div className="rounded-2xl bg-zinc-50 p-8 border border-zinc-100 transition-all hover:shadow-md">
+          <div className="flex flex-wrap justify-between items-start gap-4">
+            <div>
+              <h4 className="text-xl font-bold text-zinc-800">iOS Developer</h4>
+              <p className="text-blue-600 font-semibold">Roadcast</p>
+            </div>
+            <span className="rounded-full bg-blue-100 px-4 py-1.5 text-sm font-medium text-blue-700">
+              07/2019 - 08/2020
+            </span>
+          </div>
+          <ul className="mt-4 space-y-2 text-zinc-600 text-sm leading-7 list-disc list-inside">
+            <li>Developed and maintained scalable iOS applications using Swift, UIKit, Cocoa Touch, and Core Location.</li>
+            <li>Delivered new features aligned with product roadmap using Agile methodologies.</li>
+            <li>Debugged and optimized application performance, resolving memory leaks and UI lag.</li>
+            <li>Collaborated within cross-functional Agile teams for App Store-ready applications.</li>
+            <li>Managed version control using Git with branching strategies and merge conflict resolution.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {/* Education */}
+    <div className="mt-16">
+      <h3 className="text-2xl font-bold text-zinc-800 mb-8 flex items-center gap-3">
+        <span className="text-3xl">🎓</span> Education
+      </h3>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 p-8 border border-blue-100">
+          <h4 className="text-xl font-bold text-zinc-800">MCA - Computers</h4>
+          <p className="text-blue-600 font-semibold">REVA Institute of Technology and Management</p>
+          <p className="text-sm text-zinc-500 mt-1">Bangalore | 2019</p>
+        </div>
+        <div className="rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 p-8 border border-purple-100">
+          <h4 className="text-xl font-bold text-zinc-800">BCA - Computers</h4>
+          <p className="text-purple-600 font-semibold">Ranchi University</p>
+          <p className="text-sm text-zinc-500 mt-1">Ranchi | 2016</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Core Competencies */}
+    <div className="mt-16">
+      <h3 className="text-2xl font-bold text-zinc-800 mb-6 flex items-center gap-3">
+        <span className="text-3xl">⚡</span> Core Competencies
+      </h3>
+      <div className="flex flex-wrap gap-3">
+        {[
+          "Mobile Application Development",
+          "iOS Development",
+          "Flutter Development",
+          "API Integration (REST/JSON)",
+          "UI/UX Development",
+          "Payment Gateway Integration",
+          "Cross-Platform Development",
+          "Application Architecture (MVC)",
+          "Performance Optimization"
+        ].map((skill) => (
+          <span key={skill} className="rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 border border-zinc-200">
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    {/* Technical Skills */}
+    <div className="mt-8">
+      <h3 className="text-2xl font-bold text-zinc-800 mb-6 flex items-center gap-3">
+        <span className="text-3xl">🛠️</span> Technical Skills
+      </h3>
+      <div className="flex flex-wrap gap-2">
+        {[
+          "Swift", "Cocoa Touch", "iOS", "Xcode", "Interface Builder",
+          "Flutter", "Dart", "Firebase", "Git", "JSON", "Google APIs",
+          "HTML", "CSS", "C#", "Android Studio", "REST APIs"
+        ].map((skill) => (
+          <span key={skill} className="rounded-full bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 border border-blue-200">
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    {/* Projects Undertaken */}
+    <div className="mt-16">
+      <h3 className="text-2xl font-bold text-zinc-800 mb-6 flex items-center gap-3">
+        <span className="text-3xl">📁</span> Projects Undertaken
+      </h3>
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="rounded-xl bg-green-50 p-6 border border-green-100">
+          <h4 className="font-bold text-zinc-800">Smart Garden Monitoring</h4>
+          <p className="text-sm text-zinc-600 mt-2">Automated irrigation system with Raspberry Pi, sensors, and relay control.</p>
+          <span className="inline-block mt-3 text-xs text-green-600 font-medium bg-green-200 px-2 py-0.5 rounded">31 Days</span>
+        </div>
+        <div className="rounded-xl bg-orange-50 p-6 border border-orange-100">
+          <h4 className="font-bold text-zinc-800">Smart Locking System</h4>
+          <p className="text-sm text-zinc-600 mt-2">Home security solution with fingerprint sensor and Raspberry Pi integration.</p>
+          <span className="inline-block mt-3 text-xs text-orange-600 font-medium bg-orange-200 px-2 py-0.5 rounded">31 Days</span>
+        </div>
+        <div className="rounded-xl bg-purple-50 p-6 border border-purple-100">
+          <h4 className="font-bold text-zinc-800">Medical Inventory Management</h4>
+          <p className="text-sm text-zinc-600 mt-2">Software for medical vendors to manage inventory, track expenses, and generate bills.</p>
+          <span className="inline-block mt-3 text-xs text-purple-600 font-medium bg-purple-200 px-2 py-0.5 rounded">396 Days</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Certifications */}
+    <div className="mt-10 text-center">
+      <div className="inline-flex items-center gap-2 rounded-full bg-yellow-50 border border-yellow-200 px-6 py-2">
+        <span className="text-lg">🏅</span>
+        <span className="text-sm font-medium text-yellow-800">iOS, Swift & Flutter Certification</span>
+      </div>
+    </div>
+
+    <div className="mt-10 text-center">
+      <a 
+        href="https://api.whatsapp.com/send?phone=919693427671&text=Hi%20Vivek%2C%20I%20found%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20a%20project." 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3.5 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+      >
+        Let&apos;s Build Something Together →
+      </a>
+    </div>
+  </div>
+</section>
 
       {/* CONTACT */}
       <section id="contact" className="border-t border-zinc-200 bg-white py-24 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
